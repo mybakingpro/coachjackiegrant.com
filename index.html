@@ -1,549 +1,696 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coach Jackie Grant</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yard Manager Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
-  --sage: #4E8244;
-  --sage-light: #9DC494;
-  --sage-dark: #275C1E;
-  --rose: #C24E6E;
-  --rose-light: #EDB8C6;
-  --rose-dark: #8C2945;
-  --beige: #E8CFA0;
-  --beige-dark: #C9A87A;
-  --brown: #6E3D2C;
-  --brown-light: #9A6655;
-  --brown-dark: #3D1A0C;
-  --cream: #FAF3E4;
-  --text-dark: #250F05;
-  --text-mid: #52301E;
-  --text-light: #7D5244;
+  --bg: #f5f0e8;
+  --surface: #ffffff;
+  --surface2: #f0ebe0;
+  --border: #d4c9b0;
+  --accent: #d97706;
+  --accent2: #ef4444;
+  --green: #16a34a;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --dark: #1a1a1a;
+  --font-head: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
-h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); min-height:100vh; }
 
-/* NAV */
-nav {
-  background: var(--cream);
-  border-bottom: 1px solid var(--beige-dark);
-  padding: 1rem 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-style: italic;
-  color: var(--brown-dark);
-  font-weight: 300;
-}
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-mid);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-  font-weight: 600;
-}
-.nav-links a:hover { color: var(--sage-dark); }
+#login-screen { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 50%,#1a1a1a 100%); }
+.login-box { background:#fff; border:4px solid var(--accent); border-radius:4px; padding:48px 40px; width:400px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.login-logo { font-family:var(--font-head); font-size:38px; font-weight:800; color:var(--dark); letter-spacing:2px; margin-bottom:2px; }
+.login-logo span { color:var(--accent); }
+.login-sub { color:var(--muted); font-size:13px; margin-bottom:36px; text-transform:uppercase; letter-spacing:1px; }
+.login-box input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:12px 16px; border-radius:3px; font-family:var(--font-body); font-size:15px; margin-bottom:12px; outline:none; transition:border-color 0.2s; }
+.login-box input:focus { border-color:var(--accent); }
+.btn-primary { width:100%; background:var(--accent); color:#fff; font-family:var(--font-head); font-size:18px; font-weight:700; letter-spacing:2px; border:none; padding:13px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; text-transform:uppercase; }
+.btn-primary:hover { opacity:0.85; }
+.login-error { color:var(--accent2); font-size:13px; margin-top:10px; text-align:center; }
 
-/* HERO */
-.hero {
-  background: linear-gradient(160deg, var(--beige) 0%, var(--rose-light) 55%, var(--beige) 100%);
-  padding: 6rem 2rem 5rem;
-  text-align: center;
-}
-.hero-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--sage-dark);
-  margin-bottom: 1.25rem;
-  font-weight: 600;
-}
-.hero h1 {
-  font-size: clamp(3.5rem, 9vw, 6rem);
-  font-weight: 300;
-  color: var(--brown-dark);
-  line-height: 1.05;
-  margin-bottom: 0.25rem;
-}
-.hero h1 em { color: var(--sage-dark); font-style: italic; }
-.hero-subtitle {
-  font-size: 1rem;
-  color: var(--text-mid);
-  max-width: 480px;
-  margin: 1.75rem auto 2.75rem;
-  font-weight: 300;
-}
-.social-row { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
-.social-pill {
-  display: inline-block;
-  padding: 0.45rem 1.25rem;
-  border-radius: 50px;
-  border: 1.5px solid var(--rose-dark);
-  color: var(--rose-dark);
-  text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-.social-pill:hover { background: var(--rose-dark); color: white; }
-.social-pill.green { border-color: var(--sage-dark); color: var(--sage-dark); }
-.social-pill.green:hover { background: var(--sage-dark); color: white; }
+#app-screen { display:none; flex-direction:column; min-height:100vh; }
+.topbar { background:#1a1a1a; border-bottom:3px solid var(--accent); padding:0 24px; display:flex; align-items:center; gap:4px; height:56px; }
+.topbar-logo { font-family:var(--font-head); font-size:20px; font-weight:800; color:var(--accent); letter-spacing:2px; margin-right:16px; white-space:nowrap; }
+.nav-tabs { display:flex; gap:2px; flex:1; overflow-x:auto; }
+.nav-tab { padding:8px 14px; font-family:var(--font-head); font-size:14px; font-weight:600; letter-spacing:1px; text-transform:uppercase; background:transparent; border:none; color:#aaa; cursor:pointer; border-radius:3px; transition:all 0.2s; white-space:nowrap; }
+.nav-tab:hover { color:#fff; background:rgba(255,255,255,0.1); }
+.nav-tab.active { color:var(--accent); background:rgba(217,119,6,0.15); }
+.topbar-right { display:flex; align-items:center; gap:10px; margin-left:auto; }
+.user-badge { font-size:11px; color:#888; white-space:nowrap; }
+.btn-signout { background:transparent; border:1px solid #444; color:#888; padding:5px 12px; border-radius:3px; cursor:pointer; font-size:11px; transition:all 0.2s; }
+.btn-signout:hover { border-color:var(--accent2); color:var(--accent2); }
 
-/* SHARED SECTION STYLES */
-.wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-.eyebrow {
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--sage);
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-}
-.sec-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300; color: var(--brown-dark); margin-bottom: 0.25rem; }
-.divider { width: 55px; height: 2px; background: var(--rose); margin: 1.5rem 0 3rem; }
+.main-content { flex:1; padding:24px; max-width:1400px; margin:0 auto; width:100%; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
 
-/* BIO */
-.bio-bg { background: var(--beige); }
-.bio-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
-.bio-img {
-  background: linear-gradient(135deg, var(--rose-light), var(--beige-dark));
-  border-radius: 20px;
-  aspect-ratio: 3/4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--rose-dark);
-  font-size: 0.85rem;
-  text-align: center;
-  padding: 2rem;
-  border: 1px solid var(--beige-dark);
-}
-.bio-text p { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1rem; }
+.stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:24px; }
+.stat-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:18px 20px; position:relative; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.stat-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent); }
+.stat-card.red::before { background:var(--accent2); }
+.stat-card.green::before { background:var(--green); }
+.stat-card.blue::before { background:#3b82f6; }
+.stat-card.purple::before { background:#8b5cf6; }
+.stat-label { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:6px; }
+.stat-value { font-family:var(--font-head); font-size:32px; font-weight:800; line-height:1; }
+.stat-card.red .stat-value { color:var(--accent2); }
+.stat-card.green .stat-value { color:var(--green); }
+.stat-card.blue .stat-value { color:#3b82f6; }
+.stat-card.purple .stat-value { color:#8b5cf6; }
 
-/* CARDS GRID */
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 1.75rem;
-  border: 1px solid var(--beige-dark);
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(122,85,72,0.1); }
-.tag {
-  display: inline-block;
-  padding: 0.2rem 0.8rem;
-  border-radius: 50px;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-.tag-rose { background: var(--rose-light); color: var(--rose-dark); }
-.tag-sage { background: #e6f0e4; color: var(--sage-dark); }
-.tag-brown { background: var(--beige); color: var(--brown); }
-.card h3 { font-size: 1.4rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.75rem; line-height: 1.25; }
-.card p { font-size: 0.875rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1.25rem; }
-.price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--sage-dark); font-weight: 300; }
-.price-note { font-size: 0.78rem; color: var(--text-light); margin-top: 0.3rem; }
-.btn {
-  display: inline-block;
-  padding: 0.55rem 1.5rem;
-  border-radius: 50px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-  margin-top: 1rem;
-  letter-spacing: 0.04em;
-}
-.btn-sage { background: var(--sage); color: white; }
-.btn-sage:hover { background: var(--sage-dark); }
-.btn-outline { border: 1.5px solid var(--sage); color: var(--sage-dark); }
-.btn-outline:hover { background: var(--sage); color: white; }
+.section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+.section-title { font-family:var(--font-head); font-size:22px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.btn-add { background:var(--accent); color:#fff; font-family:var(--font-head); font-size:13px; font-weight:700; letter-spacing:1px; border:none; padding:8px 18px; border-radius:3px; cursor:pointer; text-transform:uppercase; transition:opacity 0.2s; }
+.btn-add:hover { opacity:0.85; }
 
-/* CLASS CARDS */
-.class-list { display: flex; flex-direction: column; gap: 1.25rem; }
-.class-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  border: 1px solid var(--beige-dark);
-  display: grid;
-  grid-template-columns: 72px 1fr auto;
-  gap: 1.75rem;
-  align-items: start;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.class-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(122,85,72,0.09); }
-.date-box {
-  background: var(--beige);
-  border-radius: 12px;
-  padding: 0.9rem 0.5rem;
-  text-align: center;
-}
-.date-box .day { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--brown-dark); line-height: 1; }
-.date-box .mon { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); font-weight: 600; }
-.class-info h3 { font-size: 1.3rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.5rem; }
-.class-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; }
-.badge {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.65rem;
-  padding: 0.2rem 0.65rem;
-  border-radius: 50px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  margin-right: 0.4rem;
-}
-.badge-zoom { background: #e6f0e4; color: var(--sage-dark); }
-.badge-fb { background: var(--rose-light); color: var(--rose-dark); }
-.class-meta { font-size: 0.78rem; color: var(--text-light); margin-top: 0.75rem; }
-.class-meta strong { color: var(--text-mid); }
-.class-price { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--sage-dark); font-weight: 300; white-space: nowrap; }
+.table-wrap { overflow-x:auto; border-radius:4px; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:20px; }
+.data-table { width:100%; border-collapse:collapse; }
+.data-table th { background:#1a1a1a; text-align:left; padding:10px 12px; font-family:var(--font-head); font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent); border-bottom:1px solid var(--border); }
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:middle; background:var(--surface); }
+.data-table tr:hover td { background:var(--surface2); }
 
-/* RECETARIOS BG */
-.recetarios-bg { background: var(--beige); }
-.recetarios-bg .card { background: var(--cream); }
+.badge { display:inline-block; padding:3px 8px; border-radius:2px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; font-family:var(--font-head); }
+.badge-paid { background:rgba(22,163,74,0.12); color:var(--green); }
+.badge-unpaid { background:rgba(239,68,68,0.12); color:var(--accent2); }
+.badge-late { background:rgba(239,68,68,0.2); color:#dc2626; border:1px solid rgba(239,68,68,0.3); }
+.badge-partial { background:rgba(245,158,11,0.15); color:#b45309; }
+.badge-active { background:rgba(22,163,74,0.1); color:var(--green); }
+.badge-inactive { background:rgba(107,114,128,0.15); color:var(--muted); }
+.badge-vacant { background:rgba(59,130,246,0.12); color:#2563eb; }
 
-/* WIDE CARD */
-.card-wide { grid-column: 1 / -1; }
+.btn-sm { padding:4px 10px; font-size:11px; font-family:var(--font-head); font-weight:700; letter-spacing:0.5px; border-radius:2px; cursor:pointer; border:none; transition:opacity 0.2s; text-transform:uppercase; }
+.btn-pay { background:rgba(22,163,74,0.15); color:var(--green); }
+.btn-pay:hover { background:rgba(22,163,74,0.25); }
+.btn-edit { background:rgba(217,119,6,0.12); color:var(--accent); }
+.btn-edit:hover { background:rgba(217,119,6,0.22); }
+.btn-del { background:rgba(239,68,68,0.1); color:var(--accent2); }
+.btn-del:hover { background:rgba(239,68,68,0.2); }
+.btn-note { background:rgba(139,92,246,0.12); color:#7c3aed; }
+.btn-note:hover { background:rgba(139,92,246,0.22); }
 
-/* MENTORIA */
-.mentoria-bg { background: var(--sage-dark); }
-.mentoria-inner { max-width: 700px; margin: 0 auto; text-align: center; padding: 5rem 2rem; }
-.mentoria-inner .eyebrow { color: var(--sage-light); }
-.mentoria-inner .sec-title { color: white; }
-.mentoria-inner .divider { background: var(--rose-light); margin-left: auto; margin-right: auto; }
-.mentoria-inner > p { font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 2rem; }
-.feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: 2.5rem; }
-.feature-pill {
-  background: rgba(255,255,255,0.15);
-  border-radius: 50px;
-  padding: 0.35rem 1.1rem;
-  font-size: 0.82rem;
-  color: white;
-}
-.big-price { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300; color: white; line-height: 1; margin-bottom: 0.4rem; }
-.price-sub { font-size: 0.82rem; color: var(--sage-light); margin-bottom: 2.5rem; letter-spacing: 0.05em; }
-.btn-white { background: white; color: var(--sage-dark); padding: 0.7rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-block; transition: all 0.2s; }
-.btn-white:hover { background: var(--rose-light); }
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.open { display:flex; }
+.modal { background:var(--surface); border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:4px; padding:28px; width:520px; max-width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+.modal-title { font-family:var(--font-head); font-size:20px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.form-full { grid-column:1/-1; }
+.form-row label { display:block; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:5px; font-weight:600; }
+.form-row input, .form-row select, .form-row textarea { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:9px 12px; border-radius:3px; font-family:var(--font-body); font-size:13px; outline:none; transition:border-color 0.2s; }
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color:var(--accent); }
+.form-row textarea { resize:vertical; min-height:80px; }
+.modal-actions { display:flex; gap:10px; margin-top:20px; justify-content:flex-end; }
+.btn-cancel { background:transparent; border:1px solid var(--border); color:var(--muted); padding:8px 18px; border-radius:3px; cursor:pointer; font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.btn-save { background:var(--accent); color:#fff; font-family:var(--font-head); font-size:13px; font-weight:700; letter-spacing:1px; border:none; padding:8px 22px; border-radius:3px; cursor:pointer; text-transform:uppercase; }
 
-/* FREE RESOURCES */
-.free-card {
-  background: linear-gradient(135deg, var(--beige) 0%, var(--rose-light) 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s;
-}
-.free-card:hover { transform: translateY(-4px); }
-.free-badge {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  background: var(--sage);
-  color: white;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-}
-.free-card h3 { font-size: 1.4rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.75rem; line-height: 1.3; padding-right: 3.5rem; }
-.free-card p { font-size: 0.875rem; color: var(--text-mid); margin-bottom: 1.5rem; }
+.controls-bar { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+.filter-btn { padding:6px 14px; border-radius:2px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; font-family:var(--font-head); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; transition:all 0.2s; }
+.filter-btn.active, .filter-btn:hover { border-color:var(--accent); color:var(--accent); background:rgba(217,119,6,0.08); }
+.search-input { padding:7px 14px; border:1px solid var(--border); border-radius:3px; background:var(--surface); font-family:var(--font-body); font-size:13px; outline:none; width:220px; }
+.search-input:focus { border-color:var(--accent); }
+select.ctrl-select { padding:7px 12px; border:1px solid var(--border); border-radius:3px; background:var(--surface); font-family:var(--font-body); font-size:13px; outline:none; cursor:pointer; color:var(--text); }
 
-/* FOOTER */
-footer {
-  background: var(--brown-dark);
-  color: var(--beige);
-  padding: 3.5rem 2rem;
-  text-align: center;
-}
-.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; color: var(--rose-light); margin-bottom: 0.75rem; font-weight: 300; }
-.footer-tagline { font-size: 0.78rem; color: var(--brown-light); margin-bottom: 2rem; letter-spacing: 0.05em; }
-.footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-.footer-links a { color: var(--beige-dark); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
-.footer-links a:hover { color: var(--rose-light); }
-.footer-copy { font-size: 0.7rem; color: var(--brown-light); }
+.report-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-bottom:24px; }
+.report-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.report-card-title { font-family:var(--font-head); font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; border-bottom:2px solid var(--accent); padding-bottom:8px; }
+.report-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--surface2); font-size:13px; }
+.report-row:last-child { border-bottom:none; }
+.report-total { display:flex; justify-content:space-between; padding:10px 0 0; margin-top:6px; font-family:var(--font-head); font-size:17px; font-weight:700; border-top:2px solid var(--border); }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  nav { flex-direction: column; gap: 0.75rem; padding: 1rem; }
-  .nav-links { gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
-  .bio-grid { grid-template-columns: 1fr; }
-  .bio-img { aspect-ratio: 1/1; }
-  .class-card { grid-template-columns: 1fr; }
-  .class-price { text-align: left; }
-  .card-wide { grid-column: auto; }
+.note-item { background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:3px; padding:12px 14px; margin-bottom:10px; }
+.note-item.incident { border-left-color:var(--accent2); }
+.note-item.payment { border-left-color:var(--green); }
+.note-item.warning { border-left-color:#f59e0b; }
+.note-meta { display:flex; gap:10px; align-items:center; margin-bottom:6px; font-size:11px; color:var(--muted); flex-wrap:wrap; }
+.note-text { font-size:13px; line-height:1.5; }
+
+.btn-print { background:#1a1a1a; color:#fff; font-family:var(--font-head); font-size:12px; font-weight:700; letter-spacing:1px; border:none; padding:7px 16px; border-radius:3px; cursor:pointer; text-transform:uppercase; }
+.btn-report { background:var(--surface2); border:1px solid var(--border); color:var(--text); font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:1px; padding:8px 18px; border-radius:3px; cursor:pointer; text-transform:uppercase; transition:all 0.2s; }
+.btn-report:hover { border-color:var(--accent); color:var(--accent); }
+
+.empty-state { text-align:center; padding:50px 20px; color:var(--muted); font-size:14px; }
+.msg { font-size:12px; padding:9px 12px; border-radius:3px; margin-bottom:12px; }
+.msg-success { background:rgba(22,163,74,0.1); color:var(--green); border:1px solid rgba(22,163,74,0.2); }
+.msg-error { background:rgba(239,68,68,0.1); color:var(--accent2); border:1px solid rgba(239,68,68,0.2); }
+
+@media print {
+  .topbar,.controls-bar,.btn-add,.btn-sm,.btn-print,.nav-tabs,.topbar-right,.modal-overlay { display:none !important; }
+  body { background:#fff; }
+  .main-content { padding:0; }
+  .tab-panel { display:block !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Jackie Grant</div>
-  <ul class="nav-links">
-    <li><a href="#clases">Clases</a></li>
-    <li><a href="#recetarios">Recetarios</a></li>
-    <li><a href="#guias">Guías</a></li>
-    <li><a href="#gratis">Gratis</a></li>
-    <li><a href="#mentoria">Mentoría</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <p class="hero-eyebrow">Business Coach &nbsp;·&nbsp; Repostera &nbsp;·&nbsp; International Food Safety Manager</p>
-  <h1>Coach<br><em>Jackie Grant</em></h1>
-  <p class="hero-subtitle">Tu mentora en el mundo dulce del emprendimiento. Aprende, crece y convierte tu pasión por la repostería en un negocio exitoso.</p>
-  <div class="social-row">
-    <a href="https://wa.me/17875292454" class="social-pill green">WhatsApp · 787-529-2454</a>
-    <a href="https://instagram.com/coachjackiegrant" class="social-pill">Instagram</a>
-    <a href="https://facebook.com/coachjackiegrant" class="social-pill">Facebook</a>
-    <a href="https://youtube.com/@coachjackiegrant1" class="social-pill">YouTube</a>
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">YARD MANAGER <span>PRO</span></div>
+    <div class="login-sub">Truck Yard Payment System</div>
+    <input type="email" id="login-email" placeholder="Email address"/>
+    <input type="password" id="login-pass" placeholder="Password"/>
+    <button class="btn-primary" onclick="doLogin()">ENTER</button>
+    <div class="login-error" id="login-err"></div>
   </div>
-</header>
+</div>
 
-<!-- BIO -->
-<section class="bio-bg">
-  <div class="wrap">
-    <div class="bio-grid">
-      <div class="bio-img">
-        <p>[ Foto de Jackie ]<br><br>Sube tu foto aquí</p>
-      </div>
-      <div class="bio-text">
-        <p class="eyebrow">Sobre mí</p>
-        <h2 class="sec-title">Hola, soy<br><em style="color: var(--rose-dark);">Jackie Grant</em></h2>
-        <div class="divider"></div>
-        <p>Chef profesional, business coach certificada y tu mayor fan cuando se trata de convertir tu pasión por la repostería en un negocio que te pague bien.</p>
-        <p>Con más de <strong style="color:var(--brown)">26 años en la industria culinaria</strong> y <strong style="color:var(--brown)">9 años ayudando a reposteros caseros</strong> a emprender, he visto de todo — desde el que no sabe cuánto cobrar por un bizcocho hasta el que ya tiene una clientela sólida y quiere llevar su negocio al próximo nivel. En ambos casos, estoy aquí para ti.</p>
-        <p>Mi especialidad no es solo enseñarte a hornear bonito — es enseñarte a <strong style="color:var(--brown)">cobrar lo que vale tu trabajo</strong>, calcular tus costos, y construir un negocio rentable desde casa. También soy proctor certificada en seguridad alimentaria (NRFSP), porque un negocio serio empieza con bases sólidas.</p>
-        <p>Cientos de estudiantes ya han transformado su talento en ingresos reales. <strong style="color:var(--sage-dark)">¿Eres el próximo?</strong></p>
-        <blockquote style="margin-top:1.75rem; padding: 1.2rem 1.5rem; border-left: 3px solid var(--rose); background: var(--rose-light); border-radius: 0 12px 12px 0;">
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:var(--brown-dark); margin:0; line-height:1.6;">"Tu talento puede convertirse en tu negocio, cuando aprendes a valorarlo y gestionarlo correctamente."</p>
-          <p style="font-size:0.75rem; color:var(--text-light); margin-top:0.6rem; margin-bottom:0;">— Jackie Grant</p>
-        </blockquote>
-      </div>
+<div id="app-screen">
+  <div class="topbar">
+    <div class="topbar-logo">⚡ YARD MGR PRO</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showTab('dashboard',this)">Dashboard</button>
+      <button class="nav-tab" onclick="showTab('spaces',this)">Spaces</button>
+      <button class="nav-tab" onclick="showTab('payments',this)">Payments</button>
+      <button class="nav-tab" onclick="showTab('notes',this)">Notes</button>
+      <button class="nav-tab" onclick="showTab('reports',this)">Reports</button>
+    </div>
+    <div class="topbar-right">
+      <span class="user-badge" id="user-label"></span>
+      <button class="btn-signout" onclick="doSignOut()">Sign Out</button>
     </div>
   </div>
-</section>
 
-<!-- CLASES -->
-<section id="clases">
-  <div class="wrap">
-    <p class="eyebrow">Aprende conmigo</p>
-    <h2 class="sec-title">Clases Activas</h2>
-    <div class="divider"></div>
-    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Para reservar tu espacio, escríbeme por WhatsApp. Al hacer clic en el botón recibirás automáticamente la información de pago. 💬</p>
-    <div class="class-list">
+  <div class="main-content">
 
-      <!-- Clase 1 -->
-      <div class="class-card">
-        <div class="date-box">
-          <div class="day">13</div>
-          <div class="mon">May</div>
-        </div>
-        <div class="class-info">
-          <h3>Costos y Emprendimiento en la Repostería</h3>
-          <p>Aprende a calcular tus costos, fijar precios de venta y emprender con estrategia en el mundo de la repostería casera.</p>
-          <div><span class="badge badge-zoom">Zoom · Online</span></div>
-          <p class="class-meta"><strong>Miércoles 13 de mayo</strong> · 6:00 PM &nbsp;|&nbsp; <strong>Sábado 16 de mayo</strong> · 5:00 PM</p>
-          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Costos%20y%20Emprendimiento%20en%20la%20Reposter%C3%ADa%20%F0%9F%93%8A%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Escríbeme por WhatsApp</a>
-        </div>
-        <div class="class-price">$25</div>
+    <!-- DASHBOARD -->
+    <div class="tab-panel active" id="tab-dashboard">
+      <div class="stats-row">
+        <div class="stat-card green"><div class="stat-label">Paid This Month</div><div class="stat-value" id="s-paid">—</div></div>
+        <div class="stat-card red"><div class="stat-label">Unpaid / Late</div><div class="stat-value" id="s-unpaid">—</div></div>
+        <div class="stat-card blue"><div class="stat-label">Active Spaces</div><div class="stat-value" id="s-spaces">—</div></div>
+        <div class="stat-card purple"><div class="stat-label">Vacant Spaces</div><div class="stat-value" id="s-vacant">—</div></div>
+        <div class="stat-card"><div class="stat-label">Revenue This Month</div><div class="stat-value" id="s-revenue">—</div></div>
+        <div class="stat-card red"><div class="stat-label">Late Fees Collected</div><div class="stat-value" id="s-latefees">—</div></div>
       </div>
-
-      <!-- Clase 2 -->
-      <div class="class-card">
-        <div class="date-box">
-          <div class="day">19</div>
-          <div class="mon">May</div>
-        </div>
-        <div class="class-info">
-          <h3>Espatulado Liso con Decoración Vintage</h3>
-          <p>Frosting de manteca, varias duyas y técnicas de decoración vintage. Clase en vivo que queda grabada para que la veas cuando quieras.</p>
-          <div><span class="badge badge-fb">Grupo Privado · Facebook</span><span class="badge badge-fb">En vivo + grabada</span></div>
-          <p class="class-meta"><strong>Lunes 19 de mayo</strong> · 6:00 PM EST</p>
-          <p style="font-size:0.78rem;color:var(--rose-dark);margin-top:0.5rem;">✦ Escribe por WhatsApp para reservar tu espacio</p>
-          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Espatulado%20Liso%20con%20Decoraci%C3%B3n%20Vintage%20%F0%9F%8E%A8%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Reservar por WhatsApp</a>
-        </div>
-        <div class="class-price">$8</div>
+      <div class="section-header">
+        <div class="section-title">Unpaid / Late This Month</div>
+        <span id="dash-month-label" style="color:var(--muted);font-size:13px;"></span>
       </div>
-
-      <!-- Clase 3 -->
-      <div class="class-card">
-        <div class="date-box">
-          <div class="day">26</div>
-          <div class="mon">May</div>
-        </div>
-        <div class="class-info">
-          <h3>Bizcocho Rectangular en Tendencia</h3>
-          <p>Bizcocho en capas con relleno, frosting de chantilly comercial, topping de frutas frescas y mucho más. Clase en vivo que queda grabada.</p>
-          <div><span class="badge badge-fb">Grupo Privado · Facebook</span><span class="badge badge-fb">En vivo + grabada</span></div>
-          <p class="class-meta"><strong>Lunes 26 de mayo</strong> · 6:00 PM EST</p>
-          <p style="font-size:0.78rem;color:var(--rose-dark);margin-top:0.5rem;">✦ Escribe por WhatsApp para reservar tu espacio</p>
-          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Bizcocho%20Rectangular%20en%20Tendencia%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Reservar por WhatsApp</a>
-        </div>
-        <div class="class-price">$8</div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Space</th><th>Driver</th><th>Phone</th><th>Rent</th><th>Late Fee</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="dash-tbody"><tr><td colspan="7" class="empty-state">Loading...</td></tr></tbody>
+        </table>
       </div>
+    </div>
 
+    <!-- SPACES -->
+    <div class="tab-panel" id="tab-spaces">
+      <div class="section-header">
+        <div class="section-title">Spaces &amp; Drivers</div>
+        <button class="btn-add" onclick="openDriverModal()">+ Add Driver</button>
+      </div>
+      <div class="controls-bar">
+        <input class="search-input" id="spaces-search" placeholder="Search name or space..." oninput="renderSpaces()"/>
+        <button class="filter-btn active" onclick="setSpaceFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setSpaceFilter('active',this)">Active</button>
+        <button class="filter-btn" onclick="setSpaceFilter('inactive',this)">Inactive</button>
+        <button class="filter-btn" onclick="setSpaceFilter('vacant',this)">Vacant</button>
+      </div>
+      <div id="spaces-msg"></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Space</th><th>Driver</th><th>Phone</th><th>Rent/Mo</th><th>Move In</th><th>Truck Plate</th><th>Email</th><th>Pmt Method</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="spaces-tbody"><tr><td colspan="10" class="empty-state">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="tab-panel" id="tab-payments">
+      <div class="controls-bar">
+        <label style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">Month:</label>
+        <select class="ctrl-select" id="pay-month"></select>
+        <select class="ctrl-select" id="pay-year"></select>
+        <button class="btn-add" onclick="loadPaymentsTab()">Load</button>
+        <button class="btn-report" onclick="generateMonthlyPayments()">Generate Month</button>
+        <button class="btn-print" onclick="window.print()">🖨 Print</button>
+      </div>
+      <div class="controls-bar">
+        <button class="filter-btn active" onclick="setPayFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setPayFilter('paid',this)">Paid</button>
+        <button class="filter-btn" onclick="setPayFilter('unpaid',this)">Unpaid</button>
+        <button class="filter-btn" onclick="setPayFilter('late',this)">Late</button>
+        <button class="filter-btn" onclick="setPayFilter('partial',this)">Partial</button>
+      </div>
+      <div id="payments-msg"></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Space</th><th>Driver</th><th>Rent</th><th>Late Fee</th><th>Balance Due</th><th>Status</th><th>Method</th><th>Paid Date</th><th>Actions</th></tr></thead>
+          <tbody id="pay-tbody"><tr><td colspan="9" class="empty-state">Select a month and click Load</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="tab-panel" id="tab-notes">
+      <div class="section-header">
+        <div class="section-title">Driver Notes &amp; Incidents</div>
+        <button class="btn-add" onclick="openNoteModal()">+ Add Note</button>
+      </div>
+      <div class="controls-bar">
+        <select class="ctrl-select" id="notes-driver-filter" onchange="loadNotes()">
+          <option value="">All Drivers</option>
+        </select>
+        <button class="filter-btn active" onclick="setNoteFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setNoteFilter('general',this)">General</button>
+        <button class="filter-btn" onclick="setNoteFilter('incident',this)">Incident</button>
+        <button class="filter-btn" onclick="setNoteFilter('payment',this)">Payment</button>
+        <button class="filter-btn" onclick="setNoteFilter('warning',this)">Warning</button>
+      </div>
+      <div id="notes-msg"></div>
+      <div id="notes-list"><div class="empty-state">Loading notes...</div></div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="tab-panel" id="tab-reports">
+      <div class="section-header">
+        <div class="section-title">Reports</div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <select class="ctrl-select" id="rep-month"></select>
+          <select class="ctrl-select" id="rep-year"></select>
+          <button class="btn-add" onclick="loadReports()">Run Report</button>
+          <button class="btn-print" onclick="window.print()">🖨 Print</button>
+        </div>
+      </div>
+      <div id="reports-content"><div class="empty-state">Select a month and click Run Report.</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DRIVER MODAL -->
+<div class="modal-overlay" id="driver-modal">
+  <div class="modal">
+    <div class="modal-title" id="driver-modal-title">Add Driver</div>
+    <input type="hidden" id="edit-driver-id"/>
+    <div class="form-grid">
+      <div class="form-row"><label>Space Number *</label><input type="text" id="drv-space" placeholder="e.g. A-12"/></div>
+      <div class="form-row"><label>Status</label><select id="drv-status"><option value="active">Active</option><option value="inactive">Inactive</option><option value="vacant">Vacant</option></select></div>
+      <div class="form-row form-full"><label>Driver Full Name *</label><input type="text" id="drv-name" placeholder="Full name"/></div>
+      <div class="form-row"><label>Phone Number</label><input type="text" id="drv-phone" placeholder="(555) 555-5555"/></div>
+      <div class="form-row"><label>Monthly Rent ($) *</label><input type="number" id="drv-rent" placeholder="450"/></div>
+      <div class="form-row"><label>Move-In Date</label><input type="date" id="drv-movein"/></div>
+      <div class="form-row"><label>Move-Out Date</label><input type="date" id="drv-moveout"/></div>
+      <div class="form-row"><label>Truck Plate</label><input type="text" id="drv-plate" placeholder="ABC-1234"/></div>
+      <div class="form-row"><label>Email Address</label><input type="email" id="drv-email" placeholder="driver@email.com"/></div>
+      <div class="form-row"><label>Preferred Payment</label><select id="drv-payment"><option value="cash">Cash</option><option value="zelle">Zelle</option><option value="check">Check</option><option value="venmo">Venmo</option><option value="other">Other</option></select></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeDriverModal()">Cancel</button>
+      <button class="btn-save" onclick="saveDriver()">Save Driver</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- RECETARIOS -->
-<section id="recetarios" class="recetarios-bg">
-  <div class="wrap">
-    <p class="eyebrow">Lleva la repostería a tu hogar</p>
-    <h2 class="sec-title">Recetarios Digitales</h2>
-    <div class="divider"></div>
-    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Para adquirir cualquier recetario, haz clic en el botón y te llegará toda la información de pago directamente por WhatsApp. 💬</p>
-    <div class="cards-grid">
-
-      <div class="card">
-        <span class="tag tag-rose">Recetario Digital</span>
-        <h3>Bizcochos Modificados de Cajita</h3>
-        <p>Transforma simples mezclas de cajita en bizcochos extraordinarios con los tips y secretos de Jackie Grant.</p>
-        <div class="price">$22</div>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Bizcochos%20Modificados%20de%20Cajita%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
-      </div>
-
-      <div class="card">
-        <span class="tag tag-rose">Recetario Digital</span>
-        <h3>Cupcakes</h3>
-        <p>Recetas irresistibles de cupcakes para todos los gustos y ocasiones, con acceso a comunidad exclusiva.</p>
-        <div class="price">$27</div>
-        <p class="price-note">✦ Incluye grupo privado de Facebook</p>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Cupcakes%20%F0%9F%A7%81%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
-      </div>
-
-      <div class="card">
-        <span class="tag tag-rose">Recetario Digital</span>
-        <h3>Galletas, Barras y Whoopie Pies</h3>
-        <p>Deliciosas recetas fáciles usando cajitas de bizcochos modificadas — galletas, barras y whoopie pies irresistibles.</p>
-        <div class="price">$22</div>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Galletas%2C%20Barras%20y%20Whoopie%20Pies%20%F0%9F%8D%AA%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
-      </div>
-
-      <div class="card">
-        <span class="tag tag-rose">Recetario Digital</span>
-        <h3>Bundt Cakes</h3>
-        <p>Recetas de estos hermosos bizcochos que a través de los años han cautivado con su elegancia y sencillez.</p>
-        <div class="price">$20</div>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Bundt%20Cakes%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
-      </div>
-
-      <div class="card">
-        <span class="tag tag-rose">Recetario Digital</span>
-        <h3>Tres Leches</h3>
-        <p>Tres leches de sabores que llevarán tu paladar a otro nivel. Recetas, variaciones y mucho más.</p>
-        <div class="price">$20</div>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Tres%20Leches%20%F0%9F%8D%B0%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
-      </div>
-
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="pay-modal">
+  <div class="modal">
+    <div class="modal-title">Record Payment</div>
+    <input type="hidden" id="pay-modal-id"/>
+    <div class="form-grid">
+      <div class="form-row"><label>Payment Type</label><select id="pay-type" onchange="togglePayType()"><option value="full">Full Payment</option><option value="partial">Partial Payment</option></select></div>
+      <div class="form-row"><label>Payment Method</label><select id="pay-method"><option value="cash">Cash</option><option value="zelle">Zelle</option><option value="check">Check</option><option value="venmo">Venmo</option><option value="other">Other</option></select></div>
+      <div class="form-row" id="partial-row" style="display:none"><label>Amount Paid ($)</label><input type="number" id="partial-amount" placeholder="0.00"/></div>
+      <div class="form-row"><label>Payment Date</label><input type="date" id="pay-date"/></div>
+      <div class="form-row form-full"><label>Notes (optional)</label><textarea id="pay-notes" placeholder="Any notes about this payment..."></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closePayModal()">Cancel</button>
+      <button class="btn-save" onclick="recordPayment()">Save Payment</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- GUÍAS DE NEGOCIO -->
-<section id="guias">
-  <div class="wrap">
-    <p class="eyebrow">Emprende con confianza</p>
-    <h2 class="sec-title">Guías de Negocio</h2>
-    <div class="divider"></div>
-    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Haz clic en el botón y te llegará la información de pago automáticamente por WhatsApp. 💬</p>
-    <div class="cards-grid">
-      <div class="card card-wide" style="background: linear-gradient(135deg, white 60%, var(--beige) 100%);">
-        <span class="tag tag-brown">Guía Digital · 8 Módulos</span>
-        <h3>Guía Práctica: Costos y Emprendimiento en la Repostería Casera</h3>
-        <p>Guía completa enfocada en hacer crecer tu negocio desde casa. Incluye 8 módulos: por qué y cómo emprender, conoce tu mercado y cliente ideal, costos y precios de venta, servicio al cliente, mercadeo y branding, higiene y seguridad alimentaria, seguros y permisos (PR y EEUU), y camino al éxito. Incluye plantilla para calcular costos, ejemplo de contrato y plantilla para tu plan de negocios.</p>
-        <div class="price" style="margin-top: 0.5rem;">$39</div>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20Gu%C3%ADa%20de%20Costos%20y%20Emprendimiento%20en%20la%20Reposter%C3%ADa%20Casera%20%F0%9F%93%98%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero esta guía · WhatsApp</a>
+<!-- NOTE MODAL -->
+<div class="modal-overlay" id="note-modal">
+  <div class="modal">
+    <div class="modal-title">Add Note / Incident</div>
+    <div class="form-grid">
+      <div class="form-row form-full"><label>Driver</label><select id="note-driver"><option value="">Select driver...</option></select></div>
+      <div class="form-row"><label>Category</label><select id="note-category"><option value="general">General</option><option value="incident">Incident</option><option value="payment">Payment Contact</option><option value="warning">Warning</option></select></div>
+      <div class="form-row"><label>Date</label><input type="date" id="note-date"/></div>
+      <div class="form-row form-full"><label>Note *</label><textarea id="note-text" placeholder="Describe the note or incident..."></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeNoteModal()">Cancel</button>
+      <button class="btn-save" onclick="saveNote()">Save Note</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- MENTORÍA -->
-<section id="mentoria" class="mentoria-bg">
-  <div class="mentoria-inner">
-    <p class="eyebrow">Atención 100% personalizada</p>
-    <h2 class="sec-title">Mentoría Individualizada</h2>
-    <div class="divider"></div>
-    <p>Sesión en vivo por Zoom de 2 horas, diseñada específicamente para las necesidades de tu negocio de repostería.</p>
-    <div class="feature-pills">
-      <span class="feature-pill">Costos y precios de venta</span>
-      <span class="feature-pill">Permisos y leyes de tu estado</span>
-      <span class="feature-pill">Tips y estrategias</span>
-      <span class="feature-pill">Info específica a tu negocio</span>
-    </div>
-    <div class="big-price">$95</div>
-    <p class="price-sub">Sesión de 2 horas vía Zoom</p>
-    <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20reservar%20una%20Mentor%C3%ADa%20Individualizada%20%F0%9F%92%BC%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn-white">Reservar mi mentoría por WhatsApp</a>
-  </div>
-</section>
+<script>
+const SUPABASE_URL = 'https://bpchubmwddaibfaxdglk.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwY2h1Ym13ZGRhaWJmYXhkZ2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzNDE5ODYsImV4cCI6MjA5MTkxNzk4Nn0.Df0DMHPnCxF5YRmHpz1_cTZ1aKufgzkJTWV8sxnFpck';
+const ALLOWED_EMAILS = ['coachjackiegrant@gmail.com', 'relatedlogistics@gmail.com'];
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false } });
 
-<!-- RECURSOS GRATIS -->
-<section id="gratis">
-  <div class="wrap">
-    <p class="eyebrow">Un regalo para ti</p>
-    <h2 class="sec-title">Recursos Gratuitos</h2>
-    <div class="divider"></div>
-    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Escríbeme por WhatsApp y te envío tu recurso gratuito de inmediato. 🎁</p>
-    <div class="cards-grid">
+let currentUser = null;
+let allDrivers = [];
+let allPayments = [];
+let allNotes = [];
+let spaceFilter = 'all';
+let payFilter = 'all';
+let noteFilter = 'all';
 
-      <div class="free-card">
-        <span class="free-badge">Gratis</span>
-        <h3>Cómo Elegir Tamaños de Bizcochos y Porciones Estructuradas</h3>
-        <p>Tabla de porciones por tamaño, gráfica de corte correcto, porciones estructuradas según el número de invitados e información para cotizar y entregar con confianza.</p>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20gu%C3%ADa%20gratuita%20de%20Tama%C3%B1os%20de%20Bizcochos%20y%20Porciones%20%F0%9F%93%90%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-outline">Obtener gratis · WhatsApp</a>
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  document.getElementById('login-err').textContent = '';
+  if (!ALLOWED_EMAILS.includes(email)) { document.getElementById('login-err').textContent = 'Access denied.'; return; }
+  const { data, error } = await _sb.auth.signInWithPassword({ email, password: pass });
+  if (error) { document.getElementById('login-err').textContent = error.message; return; }
+  currentUser = data.user;
+  document.getElementById('user-label').textContent = email;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-screen').style.display = 'flex';
+  await loadAllDrivers();
+  loadDashboard();
+  initSelectors();
+}
+
+async function doSignOut() { await _sb.auth.signOut(); location.reload(); }
+
+function showTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  if (tab === 'spaces') renderSpaces();
+  if (tab === 'notes') loadNotes();
+}
+
+async function loadAllDrivers() {
+  const { data } = await _sb.from('ym_drivers').select('*').order('space_number');
+  allDrivers = data || [];
+  populateDriverSelects();
+}
+
+function populateDriverSelects() {
+  ['notes-driver-filter','note-driver'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    const first = id === 'notes-driver-filter' ? '<option value="">All Drivers</option>' : '<option value="">Select driver...</option>';
+    sel.innerHTML = first + allDrivers.map(d => `<option value="${d.id}">${d.space_number} — ${d.name}</option>`).join('');
+  });
+}
+
+async function loadDashboard() {
+  const now = new Date();
+  const monthYear = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('dash-month-label').textContent = months[now.getMonth()] + ' ' + now.getFullYear();
+  const { data: payments } = await _sb.from('ym_payments').select('*, ym_drivers(space_number,name,phone)').eq('month_year', monthYear);
+  const pList = payments || [];
+  document.getElementById('s-paid').textContent = pList.filter(p=>p.status==='paid').length;
+  document.getElementById('s-unpaid').textContent = pList.filter(p=>p.status!=='paid').length;
+  document.getElementById('s-spaces').textContent = allDrivers.filter(d=>d.status==='active').length;
+  document.getElementById('s-vacant').textContent = allDrivers.filter(d=>d.status==='vacant').length;
+  const rev = pList.filter(p=>p.status==='paid').reduce((s,p)=>s+Number(p.amount_paid||0),0);
+  const lf = pList.filter(p=>p.status==='paid'&&Number(p.late_fee)>0).reduce((s,p)=>s+Number(p.late_fee),0);
+  document.getElementById('s-revenue').textContent = '$'+rev.toFixed(2);
+  document.getElementById('s-latefees').textContent = '$'+lf.toFixed(2);
+  const unpaid = pList.filter(p=>p.status!=='paid');
+  const tbody = document.getElementById('dash-tbody');
+  if (!unpaid.length) { tbody.innerHTML=`<tr><td colspan="7" style="padding:30px;text-align:center;color:var(--green);font-weight:600">✓ All spaces paid this month!</td></tr>`; return; }
+  tbody.innerHTML = unpaid.map(p => {
+    const d = p.ym_drivers;
+    const lf = Number(p.late_fee||0);
+    const badge = p.status==='late'?'<span class="badge badge-late">LATE</span>':'<span class="badge badge-unpaid">UNPAID</span>';
+    return `<tr><td><strong>${d?d.space_number:'—'}</strong></td><td>${d?d.name:'—'}</td><td>${d?d.phone:'—'}</td><td>$${Number(p.rent_amount).toFixed(2)}</td><td>${lf>0?'<span style="color:var(--accent2)">$'+lf.toFixed(2)+'</span>':'—'}</td><td>${badge}</td><td><button class="btn-sm btn-pay" onclick="openPayModal('${p.id}')">Record</button></td></tr>`;
+  }).join('');
+}
+
+function setSpaceFilter(f, btn) {
+  spaceFilter = f;
+  document.querySelectorAll('#tab-spaces .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); renderSpaces();
+}
+
+function renderSpaces() {
+  const q = (document.getElementById('spaces-search').value||'').toLowerCase();
+  let rows = allDrivers;
+  if (spaceFilter !== 'all') rows = rows.filter(d=>d.status===spaceFilter);
+  if (q) rows = rows.filter(d=>d.name.toLowerCase().includes(q)||d.space_number.toLowerCase().includes(q));
+  const tbody = document.getElementById('spaces-tbody');
+  if (!rows.length) { tbody.innerHTML=`<tr><td colspan="10" class="empty-state">No drivers found.</td></tr>`; return; }
+  tbody.innerHTML = rows.map(d => {
+    const bc = d.status==='active'?'badge-active':d.status==='vacant'?'badge-vacant':'badge-inactive';
+    return `<tr><td><strong>${d.space_number}</strong></td><td>${d.name}</td><td>${d.phone||'—'}</td><td><strong>$${Number(d.monthly_rent).toFixed(2)}</strong></td><td style="color:var(--muted)">${d.move_in_date?new Date(d.move_in_date+'T12:00:00').toLocaleDateString():'—'}</td><td>${d.truck_plate||'—'}</td><td style="color:var(--muted)">${d.email||'—'}</td><td style="text-transform:capitalize">${d.preferred_payment||'—'}</td><td><span class="badge ${bc}">${d.status}</span></td><td style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn-sm btn-edit" onclick="editDriver('${d.id}')">Edit</button><button class="btn-sm btn-note" onclick="quickNote('${d.id}')">Note</button><button class="btn-sm btn-del" onclick="deleteDriver('${d.id}')">Del</button></td></tr>`;
+  }).join('');
+}
+
+function openDriverModal(clear=true) {
+  if (clear) {
+    document.getElementById('driver-modal-title').textContent = 'Add Driver';
+    document.getElementById('edit-driver-id').value = '';
+    ['drv-space','drv-name','drv-phone','drv-rent','drv-movein','drv-moveout','drv-plate','drv-email'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('drv-status').value='active';
+    document.getElementById('drv-payment').value='cash';
+  }
+  document.getElementById('driver-modal').classList.add('open');
+}
+function closeDriverModal() { document.getElementById('driver-modal').classList.remove('open'); }
+
+async function editDriver(id) {
+  const d = allDrivers.find(x=>x.id===id); if(!d) return;
+  document.getElementById('driver-modal-title').textContent='Edit Driver';
+  document.getElementById('edit-driver-id').value=d.id;
+  document.getElementById('drv-space').value=d.space_number;
+  document.getElementById('drv-name').value=d.name;
+  document.getElementById('drv-phone').value=d.phone||'';
+  document.getElementById('drv-rent').value=d.monthly_rent;
+  document.getElementById('drv-movein').value=d.move_in_date||'';
+  document.getElementById('drv-moveout').value=d.move_out_date||'';
+  document.getElementById('drv-plate').value=d.truck_plate||'';
+  document.getElementById('drv-email').value=d.email||'';
+  document.getElementById('drv-status').value=d.status;
+  document.getElementById('drv-payment').value=d.preferred_payment||'cash';
+  openDriverModal(false);
+}
+
+async function saveDriver() {
+  const id = document.getElementById('edit-driver-id').value;
+  const payload = {
+    space_number: document.getElementById('drv-space').value.trim(),
+    name: document.getElementById('drv-name').value.trim(),
+    phone: document.getElementById('drv-phone').value.trim(),
+    monthly_rent: parseFloat(document.getElementById('drv-rent').value)||0,
+    move_in_date: document.getElementById('drv-movein').value||null,
+    move_out_date: document.getElementById('drv-moveout').value||null,
+    truck_plate: document.getElementById('drv-plate').value.trim(),
+    email: document.getElementById('drv-email').value.trim(),
+    status: document.getElementById('drv-status').value,
+    preferred_payment: document.getElementById('drv-payment').value
+  };
+  if (!payload.space_number||!payload.name||!payload.monthly_rent) { alert('Space, name, and rent are required.'); return; }
+  let error;
+  if (id) ({ error } = await _sb.from('ym_drivers').update(payload).eq('id',id));
+  else ({ error } = await _sb.from('ym_drivers').insert(payload));
+  if (error) { showMsg('spaces-msg','Error: '+error.message,false); return; }
+  showMsg('spaces-msg', id?'Driver updated!':'Driver added!', true);
+  closeDriverModal(); await loadAllDrivers(); renderSpaces(); loadDashboard();
+}
+
+async function deleteDriver(id) {
+  if (!confirm('Remove this driver? Payment and note history will remain.')) return;
+  await _sb.from('ym_drivers').delete().eq('id',id);
+  showMsg('spaces-msg','Driver removed.',true);
+  await loadAllDrivers(); renderSpaces(); loadDashboard();
+}
+
+function initSelectors() {
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  ['pay-month','rep-month'].forEach(id => {
+    document.getElementById(id).innerHTML = months.map((m,i)=>`<option value="${String(i+1).padStart(2,'0')}">${m}</option>`).join('');
+  });
+  const now = new Date();
+  ['pay-month','rep-month'].forEach(id=>document.getElementById(id).value=String(now.getMonth()+1).padStart(2,'0'));
+  ['pay-year','rep-year'].forEach(id => {
+    let html=''; for(let y=now.getFullYear();y>=now.getFullYear()-3;y--) html+=`<option value="${y}">${y}</option>`;
+    document.getElementById(id).innerHTML=html;
+  });
+}
+
+function setPayFilter(f, btn) {
+  payFilter = f;
+  document.querySelectorAll('#tab-payments .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); renderPayments();
+}
+
+async function loadPaymentsTab() {
+  const month=document.getElementById('pay-month').value, year=document.getElementById('pay-year').value;
+  const { data } = await _sb.from('ym_payments').select('*, ym_drivers(space_number,name,preferred_payment)').eq('month_year',`${year}-${month}`);
+  allPayments = data||[]; renderPayments();
+}
+
+function renderPayments() {
+  let rows = payFilter==='all' ? allPayments : allPayments.filter(p=>p.status===payFilter);
+  rows.sort((a,b)=>(a.ym_drivers?.space_number||'').localeCompare(b.ym_drivers?.space_number||''));
+  const tbody = document.getElementById('pay-tbody');
+  if (!rows.length) { tbody.innerHTML=`<tr><td colspan="9" class="empty-state">No records. Click "Generate Month" to create records.</td></tr>`; return; }
+  tbody.innerHTML = rows.map(p => {
+    const d=p.ym_drivers, lf=Number(p.late_fee||0), bal=Number(p.balance_due||0);
+    const badge=p.status==='paid'?'<span class="badge badge-paid">PAID</span>':p.status==='late'?'<span class="badge badge-late">LATE</span>':p.status==='partial'?'<span class="badge badge-partial">PARTIAL</span>':'<span class="badge badge-unpaid">UNPAID</span>';
+    const action=p.status!=='paid'?`<button class="btn-sm btn-pay" onclick="openPayModal('${p.id}')">Record</button>`:`<span style="color:var(--green);font-size:11px">✓</span>`;
+    return `<tr><td><strong>${d?d.space_number:'—'}</strong></td><td>${d?d.name:'—'}</td><td>$${Number(p.rent_amount).toFixed(2)}</td><td>${lf>0?'<span style="color:var(--accent2)">$'+lf.toFixed(2)+'</span>':'—'}</td><td>${bal>0?'<span style="color:var(--accent2)">$'+bal.toFixed(2)+'</span>':'—'}</td><td>${badge}</td><td style="text-transform:capitalize;color:var(--muted)">${p.payment_method||'—'}</td><td style="color:var(--muted)">${p.paid_date?new Date(p.paid_date+'T12:00:00').toLocaleDateString():'—'}</td><td>${action}</td></tr>`;
+  }).join('');
+}
+
+async function generateMonthlyPayments() {
+  const month=document.getElementById('pay-month').value, year=document.getElementById('pay-year').value, monthYear=`${year}-${month}`;
+  if (!confirm(`Generate payment records for ${monthYear}?`)) return;
+  const active=allDrivers.filter(d=>d.status==='active');
+  if (!active.length) { showMsg('payments-msg','No active drivers.',false); return; }
+  const now=new Date(), day=now.getDate(), isCurrent=now.getFullYear()===parseInt(year)&&(now.getMonth()+1)===parseInt(month);
+  for (const d of active) {
+    const { data: ex } = await _sb.from('ym_payments').select('id').eq('driver_id',d.id).eq('month_year',monthYear);
+    if (!ex||!ex.length) {
+      const isLate=isCurrent&&day>5;
+      await _sb.from('ym_payments').insert({ driver_id:d.id, month_year:monthYear, rent_amount:d.monthly_rent, late_fee:isLate?35:0, status:isLate?'late':'unpaid', payment_method:d.preferred_payment||'cash', amount_paid:0, balance_due:d.monthly_rent+(isLate?35:0) });
+    }
+  }
+  showMsg('payments-msg',`Records generated for ${monthYear}.`,true); loadPaymentsTab();
+}
+
+function openPayModal(id) {
+  document.getElementById('pay-modal-id').value=id;
+  document.getElementById('pay-type').value='full';
+  document.getElementById('pay-method').value='cash';
+  document.getElementById('partial-amount').value='';
+  document.getElementById('pay-date').value=new Date().toISOString().split('T')[0];
+  document.getElementById('pay-notes').value='';
+  document.getElementById('partial-row').style.display='none';
+  document.getElementById('pay-modal').classList.add('open');
+}
+function closePayModal() { document.getElementById('pay-modal').classList.remove('open'); }
+function togglePayType() { document.getElementById('partial-row').style.display=document.getElementById('pay-type').value==='partial'?'block':'none'; }
+
+async function recordPayment() {
+  const id=document.getElementById('pay-modal-id').value, type=document.getElementById('pay-type').value;
+  const method=document.getElementById('pay-method').value, date=document.getElementById('pay-date').value, notes=document.getElementById('pay-notes').value;
+  const rec=allPayments.find(p=>p.id===id); if(!rec) return;
+  const total=Number(rec.rent_amount)+Number(rec.late_fee||0);
+  let update={ payment_method:method, paid_date:date, notes };
+  if (type==='full') { update.status='paid'; update.amount_paid=total; update.balance_due=0; }
+  else { const partial=parseFloat(document.getElementById('partial-amount').value)||0; update.status='partial'; update.amount_paid=partial; update.balance_due=Math.max(total-partial,0); }
+  await _sb.from('ym_payments').update(update).eq('id',id);
+  closePayModal(); loadPaymentsTab(); loadDashboard(); showMsg('payments-msg','Payment recorded!',true);
+}
+
+function setNoteFilter(f, btn) {
+  noteFilter=f;
+  document.querySelectorAll('#tab-notes .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); renderNotes();
+}
+
+async function loadNotes() {
+  const driverId=document.getElementById('notes-driver-filter').value;
+  let q=_sb.from('ym_notes').select('*, ym_drivers(space_number,name)').order('note_date',{ascending:false});
+  if (driverId) q=q.eq('driver_id',driverId);
+  const { data } = await q; allNotes=data||[]; renderNotes();
+}
+
+function renderNotes() {
+  let rows=noteFilter==='all'?allNotes:allNotes.filter(n=>n.category===noteFilter);
+  const container=document.getElementById('notes-list');
+  if (!rows.length) { container.innerHTML=`<div class="empty-state">No notes found.</div>`; return; }
+  container.innerHTML=rows.map(n => {
+    const d=n.ym_drivers, cls=n.category==='incident'||n.category==='warning'?n.category:n.category==='payment'?'payment':'';
+    return `<div class="note-item ${cls}"><div class="note-meta"><strong>${d?d.space_number+' — '+d.name:'Unknown'}</strong><span>·</span><span style="text-transform:capitalize;color:var(--accent)">${n.category}</span><span>·</span><span>${new Date(n.note_date+'T12:00:00').toLocaleDateString()}</span><button class="btn-sm btn-del" style="margin-left:auto" onclick="deleteNote('${n.id}')">Del</button></div><div class="note-text">${n.note}</div></div>`;
+  }).join('');
+}
+
+function openNoteModal() {
+  document.getElementById('note-driver').value='';
+  document.getElementById('note-category').value='general';
+  document.getElementById('note-date').value=new Date().toISOString().split('T')[0];
+  document.getElementById('note-text').value='';
+  document.getElementById('note-modal').classList.add('open');
+}
+function closeNoteModal() { document.getElementById('note-modal').classList.remove('open'); }
+function quickNote(driverId) { openNoteModal(); document.getElementById('note-driver').value=driverId; }
+
+async function saveNote() {
+  const driverId=document.getElementById('note-driver').value, note=document.getElementById('note-text').value.trim();
+  if (!driverId||!note) { alert('Please select a driver and enter a note.'); return; }
+  await _sb.from('ym_notes').insert({ driver_id:driverId, category:document.getElementById('note-category').value, note_date:document.getElementById('note-date').value, note });
+  closeNoteModal(); showMsg('notes-msg','Note saved!',true); loadNotes();
+}
+
+async function deleteNote(id) { if(!confirm('Delete this note?')) return; await _sb.from('ym_notes').delete().eq('id',id); loadNotes(); }
+
+async function loadReports() {
+  const month=document.getElementById('rep-month').value, year=document.getElementById('rep-year').value, monthYear=`${year}-${month}`;
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthName=months[parseInt(month)-1]+' '+year;
+  const { data: payments } = await _sb.from('ym_payments').select('*, ym_drivers(space_number,name)').eq('month_year',monthYear);
+  const { data: yearData } = await _sb.from('ym_payments').select('*').gte('month_year',`${year}-01`).lte('month_year',`${year}-12`);
+  const pList=payments||[], yList=yearData||[];
+  const paid=pList.filter(p=>p.status==='paid');
+  const totalRev=paid.reduce((s,p)=>s+Number(p.amount_paid||0),0);
+  const totalLF=paid.filter(p=>Number(p.late_fee)>0).reduce((s,p)=>s+Number(p.late_fee),0);
+  const outstanding=pList.filter(p=>p.status!=='paid').reduce((s,p)=>s+Number(p.balance_due||p.rent_amount||0),0);
+  const yearRev=yList.filter(p=>p.status==='paid').reduce((s,p)=>s+Number(p.amount_paid||0),0);
+  const yearLF=yList.filter(p=>p.status==='paid'&&Number(p.late_fee)>0).reduce((s,p)=>s+Number(p.late_fee),0);
+  const active=allDrivers.filter(d=>d.status==='active').length;
+  const vacant=allDrivers.filter(d=>d.status==='vacant').length;
+  const occupancy=allDrivers.length?Math.round(active/allDrivers.length*100):0;
+
+  document.getElementById('reports-content').innerHTML=`
+    <div style="font-family:var(--font-head);font-size:26px;font-weight:800;letter-spacing:2px;margin-bottom:20px;text-transform:uppercase;border-bottom:3px solid var(--accent);padding-bottom:10px;">Report: ${monthName}</div>
+    <div class="report-grid">
+      <div class="report-card"><div class="report-card-title">Monthly Revenue</div>
+        <div class="report-row"><span>Rent Collected</span><strong>$${(totalRev-totalLF).toFixed(2)}</strong></div>
+        <div class="report-row"><span>Late Fees Collected</span><strong style="color:var(--accent2)">$${totalLF.toFixed(2)}</strong></div>
+        <div class="report-row"><span>Outstanding Balance</span><strong style="color:var(--accent2)">$${outstanding.toFixed(2)}</strong></div>
+        <div class="report-row"><span>Paid Spaces</span><strong>${paid.length} of ${pList.length}</strong></div>
+        <div class="report-total"><span>Total Collected</span><span style="color:var(--green)">$${totalRev.toFixed(2)}</span></div>
       </div>
-
-      <div class="free-card">
-        <span class="free-badge">Gratis</span>
-        <h3>Inocuidad Alimentaria en la Repostería</h3>
-        <p>Guía digital sobre las mejores prácticas para garantizar la seguridad e higiene en la preparación de postres y productos de pastelería. Por Jackie Grant, International Food Safety Manager.</p>
-        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20gu%C3%ADa%20gratuita%20de%20Inocuidad%20Alimentaria%20en%20la%20Reposter%C3%ADa%20%F0%9F%A7%BC%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-outline">Obtener gratis · WhatsApp</a>
+      <div class="report-card"><div class="report-card-title">Occupancy — ${monthName}</div>
+        <div class="report-row"><span>Active Spaces</span><strong style="color:var(--green)">${active}</strong></div>
+        <div class="report-row"><span>Vacant Spaces</span><strong style="color:#2563eb">${vacant}</strong></div>
+        <div class="report-row"><span>Inactive</span><strong style="color:var(--muted)">${allDrivers.filter(d=>d.status==='inactive').length}</strong></div>
+        <div class="report-row"><span>Total Spaces</span><strong>${allDrivers.length}</strong></div>
+        <div class="report-total"><span>Occupancy Rate</span><span style="color:var(--green)">${occupancy}%</span></div>
       </div>
-
+      <div class="report-card"><div class="report-card-title">Year-to-Date ${year}</div>
+        <div class="report-row"><span>Total Revenue</span><strong>$${yearRev.toFixed(2)}</strong></div>
+        <div class="report-row"><span>Late Fees Collected</span><strong style="color:var(--accent2)">$${yearLF.toFixed(2)}</strong></div>
+        <div class="report-row"><span>Total Payments Recorded</span><strong>${yList.filter(p=>p.status==='paid').length}</strong></div>
+        <div class="report-total"><span>YTD Total</span><span style="color:var(--green)">$${yearRev.toFixed(2)}</span></div>
+      </div>
     </div>
-  </div>
-</section>
+    <div class="section-header"><div class="section-title">Payment Detail — ${monthName}</div></div>
+    <div class="table-wrap" style="margin-bottom:24px">
+      <table class="data-table"><thead><tr><th>Space</th><th>Driver</th><th>Rent</th><th>Late Fee</th><th>Total</th><th>Status</th><th>Method</th><th>Paid Date</th></tr></thead>
+      <tbody>${pList.sort((a,b)=>(a.ym_drivers?.space_number||'').localeCompare(b.ym_drivers?.space_number||'')).map(p=>{
+        const d=p.ym_drivers,lf=Number(p.late_fee||0);
+        const badge=p.status==='paid'?'<span class="badge badge-paid">PAID</span>':p.status==='late'?'<span class="badge badge-late">LATE</span>':p.status==='partial'?'<span class="badge badge-partial">PARTIAL</span>':'<span class="badge badge-unpaid">UNPAID</span>';
+        return `<tr><td><strong>${d?d.space_number:'—'}</strong></td><td>${d?d.name:'—'}</td><td>$${Number(p.rent_amount).toFixed(2)}</td><td>${lf>0?'$'+lf.toFixed(2):'—'}</td><td><strong>$${(Number(p.rent_amount)+lf).toFixed(2)}</strong></td><td>${badge}</td><td style="text-transform:capitalize">${p.payment_method||'—'}</td><td>${p.paid_date?new Date(p.paid_date+'T12:00:00').toLocaleDateString():'—'}</td></tr>`;
+      }).join('')}</tbody></table>
+    </div>
+    <div class="section-header"><div class="section-title">Space Tenant Directory</div></div>
+    <div class="table-wrap">
+      <table class="data-table"><thead><tr><th>Space</th><th>Driver</th><th>Phone</th><th>Email</th><th>Monthly Rent</th><th>Move-In</th><th>Truck Plate</th><th>Pmt Method</th><th>Status</th></tr></thead>
+      <tbody>${allDrivers.map(d=>{
+        const bc=d.status==='active'?'badge-active':d.status==='vacant'?'badge-vacant':'badge-inactive';
+        return `<tr><td><strong>${d.space_number}</strong></td><td>${d.name}</td><td>${d.phone||'—'}</td><td>${d.email||'—'}</td><td>$${Number(d.monthly_rent).toFixed(2)}</td><td>${d.move_in_date?new Date(d.move_in_date+'T12:00:00').toLocaleDateString():'—'}</td><td>${d.truck_plate||'—'}</td><td style="text-transform:capitalize">${d.preferred_payment||'—'}</td><td><span class="badge ${bc}">${d.status}</span></td></tr>`;
+      }).join('')}</tbody></table>
+    </div>`;
+}
 
-<!-- FOOTER -->
-<footer id="contacto">
-  <div class="footer-logo">Jackie Grant</div>
-  <p class="footer-tagline">Business Coach &nbsp;·&nbsp; Repostera &nbsp;·&nbsp; International Food Safety Manager</p>
-  <div class="footer-links">
-    <a href="https://wa.me/17875292454">WhatsApp: 787-529-2454</a>
-    <a href="https://instagram.com/coachjackiegrant">@coachjackiegrant</a>
-    <a href="https://facebook.com/coachjackiegrant">Facebook</a>
-    <a href="https://youtube.com/@coachjackiegrant1">YouTube</a>
-  </div>
-  <p class="footer-copy">© 2025 Coach Jackie Grant · Todos los derechos reservados</p>
-</footer>
-
+function showMsg(id, text, ok) {
+  const el=document.getElementById(id);
+  el.innerHTML=`<div class="msg ${ok?'msg-success':'msg-error'}">${text}</div>`;
+  setTimeout(()=>el.innerHTML='',4000);
+}
+</script>
 </body>
 </html>
