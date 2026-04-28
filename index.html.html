@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Jackie Grant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #4E8244;
+  --sage-light: #9DC494;
+  --sage-dark: #275C1E;
+  --rose: #C24E6E;
+  --rose-light: #EDB8C6;
+  --rose-dark: #8C2945;
+  --beige: #E8CFA0;
+  --beige-dark: #C9A87A;
+  --brown: #6E3D2C;
+  --brown-light: #9A6655;
+  --brown-dark: #3D1A0C;
+  --cream: #FAF3E4;
+  --text-dark: #250F05;
+  --text-mid: #52301E;
+  --text-light: #7D5244;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+
+/* NAV */
+nav {
+  background: var(--cream);
+  border-bottom: 1px solid var(--beige-dark);
+  padding: 1rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--brown-dark);
+  font-weight: 300;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-mid);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+.nav-links a:hover { color: var(--sage-dark); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--beige) 0%, var(--rose-light) 55%, var(--beige) 100%);
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+.hero h1 {
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  font-weight: 300;
+  color: var(--brown-dark);
+  line-height: 1.05;
+  margin-bottom: 0.25rem;
+}
+.hero h1 em { color: var(--sage-dark); font-style: italic; }
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-mid);
+  max-width: 480px;
+  margin: 1.75rem auto 2.75rem;
+  font-weight: 300;
+}
+.social-row { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+.social-pill {
+  display: inline-block;
+  padding: 0.45rem 1.25rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--rose-dark);
+  color: var(--rose-dark);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.social-pill:hover { background: var(--rose-dark); color: white; }
+.social-pill.green { border-color: var(--sage-dark); color: var(--sage-dark); }
+.social-pill.green:hover { background: var(--sage-dark); color: white; }
+
+/* SHARED SECTION STYLES */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+.sec-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 300; color: var(--brown-dark); margin-bottom: 0.25rem; }
+.divider { width: 55px; height: 2px; background: var(--rose); margin: 1.5rem 0 3rem; }
+
+/* BIO */
+.bio-bg { background: var(--beige); }
+.bio-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+.bio-img {
+  background: linear-gradient(135deg, var(--rose-light), var(--beige-dark));
+  border-radius: 20px;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rose-dark);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid var(--beige-dark);
+}
+.bio-text p { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1rem; }
+
+/* CARDS GRID */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  border: 1px solid var(--beige-dark);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 14px 35px rgba(122,85,72,0.1); }
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.tag-rose { background: var(--rose-light); color: var(--rose-dark); }
+.tag-sage { background: #e6f0e4; color: var(--sage-dark); }
+.tag-brown { background: var(--beige); color: var(--brown); }
+.card h3 { font-size: 1.4rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.75rem; line-height: 1.25; }
+.card p { font-size: 0.875rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1.25rem; }
+.price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--sage-dark); font-weight: 300; }
+.price-note { font-size: 0.78rem; color: var(--text-light); margin-top: 0.3rem; }
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-top: 1rem;
+  letter-spacing: 0.04em;
+}
+.btn-sage { background: var(--sage); color: white; }
+.btn-sage:hover { background: var(--sage-dark); }
+.btn-outline { border: 1.5px solid var(--sage); color: var(--sage-dark); }
+.btn-outline:hover { background: var(--sage); color: white; }
+
+/* CLASS CARDS */
+.class-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.class-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid var(--beige-dark);
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 1.75rem;
+  align-items: start;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.class-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(122,85,72,0.09); }
+.date-box {
+  background: var(--beige);
+  border-radius: 12px;
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+}
+.date-box .day { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--brown-dark); line-height: 1; }
+.date-box .mon { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); font-weight: 600; }
+.class-info h3 { font-size: 1.3rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.5rem; }
+.class-info p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-right: 0.4rem;
+}
+.badge-zoom { background: #e6f0e4; color: var(--sage-dark); }
+.badge-fb { background: var(--rose-light); color: var(--rose-dark); }
+.class-meta { font-size: 0.78rem; color: var(--text-light); margin-top: 0.75rem; }
+.class-meta strong { color: var(--text-mid); }
+.class-price { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--sage-dark); font-weight: 300; white-space: nowrap; }
+
+/* RECETARIOS BG */
+.recetarios-bg { background: var(--beige); }
+.recetarios-bg .card { background: var(--cream); }
+
+/* WIDE CARD */
+.card-wide { grid-column: 1 / -1; }
+
+/* MENTORIA */
+.mentoria-bg { background: var(--sage-dark); }
+.mentoria-inner { max-width: 700px; margin: 0 auto; text-align: center; padding: 5rem 2rem; }
+.mentoria-inner .eyebrow { color: var(--sage-light); }
+.mentoria-inner .sec-title { color: white; }
+.mentoria-inner .divider { background: var(--rose-light); margin-left: auto; margin-right: auto; }
+.mentoria-inner > p { font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 2rem; }
+.feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: 2.5rem; }
+.feature-pill {
+  background: rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.82rem;
+  color: white;
+}
+.big-price { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300; color: white; line-height: 1; margin-bottom: 0.4rem; }
+.price-sub { font-size: 0.82rem; color: var(--sage-light); margin-bottom: 2.5rem; letter-spacing: 0.05em; }
+.btn-white { background: white; color: var(--sage-dark); padding: 0.7rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-block; transition: all 0.2s; }
+.btn-white:hover { background: var(--rose-light); }
+
+/* FREE RESOURCES */
+.free-card {
+  background: linear-gradient(135deg, var(--beige) 0%, var(--rose-light) 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s;
+}
+.free-card:hover { transform: translateY(-4px); }
+.free-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--sage);
+  color: white;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+.free-card h3 { font-size: 1.4rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.75rem; line-height: 1.3; padding-right: 3.5rem; }
+.free-card p { font-size: 0.875rem; color: var(--text-mid); margin-bottom: 1.5rem; }
+
+/* FOOTER */
+footer {
+  background: var(--brown-dark);
+  color: var(--beige);
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; color: var(--rose-light); margin-bottom: 0.75rem; font-weight: 300; }
+.footer-tagline { font-size: 0.78rem; color: var(--brown-light); margin-bottom: 2rem; letter-spacing: 0.05em; }
+.footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.footer-links a { color: var(--beige-dark); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--rose-light); }
+.footer-copy { font-size: 0.7rem; color: var(--brown-light); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 0.75rem; padding: 1rem; }
+  .nav-links { gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+  .bio-grid { grid-template-columns: 1fr; }
+  .bio-img { aspect-ratio: 1/1; }
+  .class-card { grid-template-columns: 1fr; }
+  .class-price { text-align: left; }
+  .card-wide { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jackie Grant</div>
+  <ul class="nav-links">
+    <li><a href="#clases">Clases</a></li>
+    <li><a href="#recetarios">Recetarios</a></li>
+    <li><a href="#guias">Guías</a></li>
+    <li><a href="#gratis">Gratis</a></li>
+    <li><a href="#mentoria">Mentoría</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Business Coach &nbsp;·&nbsp; Repostera &nbsp;·&nbsp; International Food Safety Manager</p>
+  <h1>Coach<br><em>Jackie Grant</em></h1>
+  <p class="hero-subtitle">Tu mentora en el mundo dulce del emprendimiento. Aprende, crece y convierte tu pasión por la repostería en un negocio exitoso.</p>
+  <div class="social-row">
+    <a href="https://wa.me/17875292454" class="social-pill green">WhatsApp · 787-529-2454</a>
+    <a href="https://instagram.com/coachjackiegrant" class="social-pill">Instagram</a>
+    <a href="https://facebook.com/coachjackiegrant" class="social-pill">Facebook</a>
+    <a href="https://youtube.com/@coachjackiegrant1" class="social-pill">YouTube</a>
+  </div>
+</header>
+
+<!-- BIO -->
+<section class="bio-bg">
+  <div class="wrap">
+    <div class="bio-grid">
+      <div class="bio-img">
+        <p>[ Foto de Jackie ]<br><br>Sube tu foto aquí</p>
+      </div>
+      <div class="bio-text">
+        <p class="eyebrow">Sobre mí</p>
+        <h2 class="sec-title">Hola, soy<br><em style="color: var(--rose-dark);">Jackie Grant</em></h2>
+        <div class="divider"></div>
+        <p>Chef profesional, business coach certificada y tu mayor fan cuando se trata de convertir tu pasión por la repostería en un negocio que te pague bien.</p>
+        <p>Con más de <strong style="color:var(--brown)">26 años en la industria culinaria</strong> y <strong style="color:var(--brown)">9 años ayudando a reposteros caseros</strong> a emprender, he visto de todo — desde el que no sabe cuánto cobrar por un bizcocho hasta el que ya tiene una clientela sólida y quiere llevar su negocio al próximo nivel. En ambos casos, estoy aquí para ti.</p>
+        <p>Mi especialidad no es solo enseñarte a hornear bonito — es enseñarte a <strong style="color:var(--brown)">cobrar lo que vale tu trabajo</strong>, calcular tus costos, y construir un negocio rentable desde casa. También soy proctor certificada en seguridad alimentaria (NRFSP), porque un negocio serio empieza con bases sólidas.</p>
+        <p>Cientos de estudiantes ya han transformado su talento en ingresos reales. <strong style="color:var(--sage-dark)">¿Eres el próximo?</strong></p>
+        <blockquote style="margin-top:1.75rem; padding: 1.2rem 1.5rem; border-left: 3px solid var(--rose); background: var(--rose-light); border-radius: 0 12px 12px 0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:var(--brown-dark); margin:0; line-height:1.6;">"Tu talento puede convertirse en tu negocio, cuando aprendes a valorarlo y gestionarlo correctamente."</p>
+          <p style="font-size:0.75rem; color:var(--text-light); margin-top:0.6rem; margin-bottom:0;">— Jackie Grant</p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASES -->
+<section id="clases">
+  <div class="wrap">
+    <p class="eyebrow">Aprende conmigo</p>
+    <h2 class="sec-title">Clases Activas</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Para reservar tu espacio, escríbeme por WhatsApp. Al hacer clic en el botón recibirás automáticamente la información de pago. 💬</p>
+    <div class="class-list">
+
+      <!-- Clase 1 -->
+      <div class="class-card">
+        <div class="date-box">
+          <div class="day">13</div>
+          <div class="mon">May</div>
+        </div>
+        <div class="class-info">
+          <h3>Costos y Emprendimiento en la Repostería</h3>
+          <p>Aprende a calcular tus costos, fijar precios de venta y emprender con estrategia en el mundo de la repostería casera.</p>
+          <div><span class="badge badge-zoom">Zoom · Online</span></div>
+          <p class="class-meta"><strong>Miércoles 13 de mayo</strong> · 6:00 PM &nbsp;|&nbsp; <strong>Sábado 16 de mayo</strong> · 5:00 PM</p>
+          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Costos%20y%20Emprendimiento%20en%20la%20Reposter%C3%ADa%20%F0%9F%93%8A%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Escríbeme por WhatsApp</a>
+        </div>
+        <div class="class-price">$25</div>
+      </div>
+
+      <!-- Clase 2 -->
+      <div class="class-card">
+        <div class="date-box">
+          <div class="day">19</div>
+          <div class="mon">May</div>
+        </div>
+        <div class="class-info">
+          <h3>Espatulado Liso con Decoración Vintage</h3>
+          <p>Frosting de manteca, varias duyas y técnicas de decoración vintage. Clase en vivo que queda grabada para que la veas cuando quieras.</p>
+          <div><span class="badge badge-fb">Grupo Privado · Facebook</span><span class="badge badge-fb">En vivo + grabada</span></div>
+          <p class="class-meta"><strong>Lunes 19 de mayo</strong> · 6:00 PM EST</p>
+          <p style="font-size:0.78rem;color:var(--rose-dark);margin-top:0.5rem;">✦ Escribe por WhatsApp para reservar tu espacio</p>
+          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Espatulado%20Liso%20con%20Decoraci%C3%B3n%20Vintage%20%F0%9F%8E%A8%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Reservar por WhatsApp</a>
+        </div>
+        <div class="class-price">$8</div>
+      </div>
+
+      <!-- Clase 3 -->
+      <div class="class-card">
+        <div class="date-box">
+          <div class="day">26</div>
+          <div class="mon">May</div>
+        </div>
+        <div class="class-info">
+          <h3>Bizcocho Rectangular en Tendencia</h3>
+          <p>Bizcocho en capas con relleno, frosting de chantilly comercial, topping de frutas frescas y mucho más. Clase en vivo que queda grabada.</p>
+          <div><span class="badge badge-fb">Grupo Privado · Facebook</span><span class="badge badge-fb">En vivo + grabada</span></div>
+          <p class="class-meta"><strong>Lunes 26 de mayo</strong> · 6:00 PM EST</p>
+          <p style="font-size:0.78rem;color:var(--rose-dark);margin-top:0.5rem;">✦ Escribe por WhatsApp para reservar tu espacio</p>
+          <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20clase%20de%20Bizcocho%20Rectangular%20en%20Tendencia%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Reservar por WhatsApp</a>
+        </div>
+        <div class="class-price">$8</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RECETARIOS -->
+<section id="recetarios" class="recetarios-bg">
+  <div class="wrap">
+    <p class="eyebrow">Lleva la repostería a tu hogar</p>
+    <h2 class="sec-title">Recetarios Digitales</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Para adquirir cualquier recetario, haz clic en el botón y te llegará toda la información de pago directamente por WhatsApp. 💬</p>
+    <div class="cards-grid">
+
+      <div class="card">
+        <span class="tag tag-rose">Recetario Digital</span>
+        <h3>Bizcochos Modificados de Cajita</h3>
+        <p>Transforma simples mezclas de cajita en bizcochos extraordinarios con los tips y secretos de Jackie Grant.</p>
+        <div class="price">$22</div>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Bizcochos%20Modificados%20de%20Cajita%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
+      </div>
+
+      <div class="card">
+        <span class="tag tag-rose">Recetario Digital</span>
+        <h3>Cupcakes</h3>
+        <p>Recetas irresistibles de cupcakes para todos los gustos y ocasiones, con acceso a comunidad exclusiva.</p>
+        <div class="price">$27</div>
+        <p class="price-note">✦ Incluye grupo privado de Facebook</p>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Cupcakes%20%F0%9F%A7%81%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
+      </div>
+
+      <div class="card">
+        <span class="tag tag-rose">Recetario Digital</span>
+        <h3>Galletas, Barras y Whoopie Pies</h3>
+        <p>Deliciosas recetas fáciles usando cajitas de bizcochos modificadas — galletas, barras y whoopie pies irresistibles.</p>
+        <div class="price">$22</div>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Galletas%2C%20Barras%20y%20Whoopie%20Pies%20%F0%9F%8D%AA%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
+      </div>
+
+      <div class="card">
+        <span class="tag tag-rose">Recetario Digital</span>
+        <h3>Bundt Cakes</h3>
+        <p>Recetas de estos hermosos bizcochos que a través de los años han cautivado con su elegancia y sencillez.</p>
+        <div class="price">$20</div>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Bundt%20Cakes%20%F0%9F%8E%82%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
+      </div>
+
+      <div class="card">
+        <span class="tag tag-rose">Recetario Digital</span>
+        <h3>Tres Leches</h3>
+        <p>Tres leches de sabores que llevarán tu paladar a otro nivel. Recetas, variaciones y mucho más.</p>
+        <div class="price">$20</div>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20el%20recetario%20de%20Tres%20Leches%20%F0%9F%8D%B0%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero este recetario · WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GUÍAS DE NEGOCIO -->
+<section id="guias">
+  <div class="wrap">
+    <p class="eyebrow">Emprende con confianza</p>
+    <h2 class="sec-title">Guías de Negocio</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Haz clic en el botón y te llegará la información de pago automáticamente por WhatsApp. 💬</p>
+    <div class="cards-grid">
+      <div class="card card-wide" style="background: linear-gradient(135deg, white 60%, var(--beige) 100%);">
+        <span class="tag tag-brown">Guía Digital · 8 Módulos</span>
+        <h3>Guía Práctica: Costos y Emprendimiento en la Repostería Casera</h3>
+        <p>Guía completa enfocada en hacer crecer tu negocio desde casa. Incluye 8 módulos: por qué y cómo emprender, conoce tu mercado y cliente ideal, costos y precios de venta, servicio al cliente, mercadeo y branding, higiene y seguridad alimentaria, seguros y permisos (PR y EEUU), y camino al éxito. Incluye plantilla para calcular costos, ejemplo de contrato y plantilla para tu plan de negocios.</p>
+        <div class="price" style="margin-top: 0.5rem;">$39</div>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20Gu%C3%ADa%20de%20Costos%20y%20Emprendimiento%20en%20la%20Reposter%C3%ADa%20Casera%20%F0%9F%93%98%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-sage">Quiero esta guía · WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENTORÍA -->
+<section id="mentoria" class="mentoria-bg">
+  <div class="mentoria-inner">
+    <p class="eyebrow">Atención 100% personalizada</p>
+    <h2 class="sec-title">Mentoría Individualizada</h2>
+    <div class="divider"></div>
+    <p>Sesión en vivo por Zoom de 2 horas, diseñada específicamente para las necesidades de tu negocio de repostería.</p>
+    <div class="feature-pills">
+      <span class="feature-pill">Costos y precios de venta</span>
+      <span class="feature-pill">Permisos y leyes de tu estado</span>
+      <span class="feature-pill">Tips y estrategias</span>
+      <span class="feature-pill">Info específica a tu negocio</span>
+    </div>
+    <div class="big-price">$95</div>
+    <p class="price-sub">Sesión de 2 horas vía Zoom</p>
+    <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20reservar%20una%20Mentor%C3%ADa%20Individualizada%20%F0%9F%92%BC%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn-white">Reservar mi mentoría por WhatsApp</a>
+  </div>
+</section>
+
+<!-- RECURSOS GRATIS -->
+<section id="gratis">
+  <div class="wrap">
+    <p class="eyebrow">Un regalo para ti</p>
+    <h2 class="sec-title">Recursos Gratuitos</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:2rem;">Escríbeme por WhatsApp y te envío tu recurso gratuito de inmediato. 🎁</p>
+    <div class="cards-grid">
+
+      <div class="free-card">
+        <span class="free-badge">Gratis</span>
+        <h3>Cómo Elegir Tamaños de Bizcochos y Porciones Estructuradas</h3>
+        <p>Tabla de porciones por tamaño, gráfica de corte correcto, porciones estructuradas según el número de invitados e información para cotizar y entregar con confianza.</p>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20gu%C3%ADa%20gratuita%20de%20Tama%C3%B1os%20de%20Bizcochos%20y%20Porciones%20%F0%9F%93%90%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-outline">Obtener gratis · WhatsApp</a>
+      </div>
+
+      <div class="free-card">
+        <span class="free-badge">Gratis</span>
+        <h3>Inocuidad Alimentaria en la Repostería</h3>
+        <p>Guía digital sobre las mejores prácticas para garantizar la seguridad e higiene en la preparación de postres y productos de pastelería. Por Jackie Grant, International Food Safety Manager.</p>
+        <a href="https://wa.me/17875292454?text=Hola%20Jackie%21%20Me%20interesa%20la%20gu%C3%ADa%20gratuita%20de%20Inocuidad%20Alimentaria%20en%20la%20Reposter%C3%ADa%20%F0%9F%A7%BC%0A%0A%F0%9F%92%B3%20%2AM%C3%A9todos%20de%20pago%3A%2A%0A%E2%80%A2%20Zelle%3A%20coachjackiegrant%40gmail.com%0A%E2%80%A2%20CashApp%3A%20%24coachjackiegrant%0A%E2%80%A2%20PayPal%3A%20%40jackiegrant515%0A%E2%80%A2%20ATH%20M%C3%B3vil%3A%20718-924-0241%20%28Samuel%20Grant%29" class="btn btn-outline">Obtener gratis · WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="footer-logo">Jackie Grant</div>
+  <p class="footer-tagline">Business Coach &nbsp;·&nbsp; Repostera &nbsp;·&nbsp; International Food Safety Manager</p>
+  <div class="footer-links">
+    <a href="https://wa.me/17875292454">WhatsApp: 787-529-2454</a>
+    <a href="https://instagram.com/coachjackiegrant">@coachjackiegrant</a>
+    <a href="https://facebook.com/coachjackiegrant">Facebook</a>
+    <a href="https://youtube.com/@coachjackiegrant1">YouTube</a>
+  </div>
+  <p class="footer-copy">© 2025 Coach Jackie Grant · Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
