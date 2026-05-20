@@ -23,8 +23,8 @@
 <script type="text/babel">
 
 // ── SUPABASE ── Replace with your keys from supabase.com → Settings → API
-const SUPABASE_URL  = "https://pieizxwyecjfaujyqtcw.supabase.co";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZWl6eHd5ZWNqZmF1anlxdGN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzNDYzOTEsImV4cCI6MjA5MTkyMjM5MX0.zbiO3PfBDqHO589WHUTi1NJVbZC1pnbpL9ZbnyzgC-M";
+const SUPABASE_URL  = "https://YOUR_PROJECT.supabase.co";
+const SUPABASE_ANON = "YOUR_ANON_KEY";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 const { useState, useEffect, useCallback } = React;
@@ -416,7 +416,7 @@ function App() {
       {/* PROMO STRIP */}
       <div style={{background:`linear-gradient(90deg,${C.pinkDeep},${C.brown})`,padding:"9px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,flexShrink:0}}>
         <span style={{color:C.pinkLight,fontSize:13}}>✨ {t.promo}</span>
-        <a href="https://https://mybakingpro.com" target="_blank" rel="noopener noreferrer" style={{background:C.pinkLight,color:C.brown,borderRadius:20,padding:"5px 16px",fontSize:12,fontWeight:"bold",textDecoration:"none"}}>
+        <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" style={{background:C.pinkLight,color:C.brown,borderRadius:20,padding:"5px 16px",fontSize:12,fontWeight:"bold",textDecoration:"none"}}>
           {t.promoBtn}
         </a>
       </div>
@@ -535,7 +535,7 @@ function App() {
             <div style={{fontSize:12,color:C.brownLight,lineHeight:1.6,marginBottom:14,position:"relative"}}>
               {lang==="es"?"Control de ingresos, inventario, recetas y más para tu negocio.":"Revenue, inventory, recipe costing & more for your business."}
             </div>
-            <a href="https://https://mybakingpro.com" target="_blank" rel="noopener noreferrer"
+            <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer"
               style={{display:"block",background:`linear-gradient(135deg,${C.pink},${C.pinkDeep})`,color:C.white,borderRadius:10,padding:"9px 20px",fontSize:12,fontWeight:"bold",textDecoration:"none",position:"relative"}}>
               {t.promoBtn}
             </a>
