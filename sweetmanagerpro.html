@@ -115,6 +115,7 @@ const T = {
 };
 
 function todayStr(){ return new Date().toISOString().slice(0,10); }
+function fmt12h(t){ if(!t) return ""; const [h,m]=t.split(":"); const hr=parseInt(h); return `${hr%12||12}:${m} ${hr>=12?"PM":"AM"}`; }
 function getDays(y,m){ return new Date(y,m+1,0).getDate(); }
 function getFirst(y,m){ return new Date(y,m,1).getDay(); }
 function dateStr(y,m,d){ return `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`; }
@@ -266,7 +267,7 @@ function OrderModal({ t, form, setForm, onSave, onDelete, onClose, isEdit, savin
           </div>
           <div>
             <label style={lbl}>{t.form.time}</label>
-            <input style={inp} type="time" value={form.time||""} onChange={e=>setForm(f=>({...f,time:e.target.value}))}/>
+            <div style={{display:"flex",gap:6}}><select style={{...inp,flex:1,cursor:"pointer"}} value={form.timeHour||"12"} onChange={e=>setForm(f=>({...f,timeHour:e.target.value,time:`${e.target.value}:${f.timeMin||"00"} ${f.timeAmPm||"AM"}`}))}>{"1,2,3,4,5,6,7,8,9,10,11,12".split(",").map(h=><option key={h}>{h}</option>)}</select><select style={{...inp,flex:1,cursor:"pointer"}} value={form.timeMin||"00"} onChange={e=>setForm(f=>({...f,timeMin:e.target.value,time:`${f.timeHour||"12"}:${e.target.value} ${f.timeAmPm||"AM"}`}))}>{"00,15,30,45".split(",").map(m=><option key={m}>{m}</option>)}</select><select style={{...inp,flex:1,cursor:"pointer"}} value={form.timeAmPm||"AM"} onChange={e=>setForm(f=>({...f,timeAmPm:e.target.value,time:`${f.timeHour||"12"}:${f.timeMin||"00"} ${e.target.value}`}))}><option>AM</option><option>PM</option></select></div>
           </div>
           <div>
             <label style={lbl}>{t.form.type}</label>
@@ -511,7 +512,7 @@ function App() {
                     </div>
                     <div style={{fontSize:12,color:C.textMid,marginTop:3}}>{o.item}{o.quantity>1?` × ${o.quantity}`:""}</div>
                     <div style={{fontSize:11,color:C.textLight,marginTop:4,display:"flex",gap:10}}>
-                      {o.time&&<span>🕐 {o.time}</span>}
+                      {o.time&&<span>🕐 {fmt12h(o.time)}</span>}
                       <span>{o.type==="Delivery"?"🚗":"🛍"} {o.type}</span>
                     </div>
                     {o.notes&&<div style={{fontSize:11,color:C.textLight,marginTop:4,fontStyle:"italic",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{o.notes}</div>}
