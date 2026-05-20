@@ -77,6 +77,7 @@ const T = {
       pickup:"🛍 Pickup", delivery:"🚗 Delivery",
     },
     promo:"Ready to track revenue, inventory & more?",
+    promoBtn2:"Explore La Academia →",
     promoBtn:"Explore MyBakingPro →",
     footer:"Part of the MyBakingPro family · Free forever",
     saving:"Saving…", errorLoad:"Could not load orders. Please refresh.",
@@ -107,6 +108,7 @@ const T = {
       pickup:"🛍 Recoger", delivery:"🚗 Entrega",
     },
     promo:"¿Lista para controlar ingresos, inventario y más?",
+    promoBtn2:"Ver La Academia →",
     promoBtn:"Ver MyBakingPro →",
     footer:"Parte de la familia MyBakingPro · Siempre gratis",
     saving:"Guardando…", errorLoad:"No se pudieron cargar los pedidos.",
@@ -417,9 +419,10 @@ function App() {
       {/* PROMO STRIP */}
       <div style={{background:`linear-gradient(90deg,${C.pinkDeep},${C.brown})`,padding:"9px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,flexShrink:0}}>
         <span style={{color:C.pinkLight,fontSize:13}}>✨ {t.promo}</span>
-        <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" style={{background:C.pinkLight,color:C.brown,borderRadius:20,padding:"5px 16px",fontSize:12,fontWeight:"bold",textDecoration:"none"}}>
-          {t.promoBtn}
-        </a>
+        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+          <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" style={{background:C.pinkLight,color:C.brown,borderRadius:20,padding:"5px 16px",fontSize:12,fontWeight:"bold",textDecoration:"none"}}>{t.promoBtn}</a>
+          <a href="/academia" style={{background:C.sageLight,color:C.sageMid,borderRadius:20,padding:"5px 16px",fontSize:12,fontWeight:"bold",textDecoration:"none"}}>{t.promoBtn2}</a>
+        </div>
       </div>
 
       {error&&<div style={{background:"#FDF0F0",borderBottom:"1px solid #F4AAAA",padding:"10px 24px",fontSize:13,color:"#8A1A1A",textAlign:"center"}}>{error}</div>}
