@@ -1182,7 +1182,31 @@ function openAddContent(){
     </div>
     <div id="ct-vimeo-field" class="form-field"><label>${t('contentVimeo')} (${lang==='es'?'solo el número':'numbers only'})</label><input type="text" id="ct-vimeo" placeholder="ej: 123456789"/></div>
     <div class="form-field"><label>${t('contentBody')}</label><textarea id="ct-body"></textarea></div>
-    <div id="ct-file-field" class="form-field" style="display:none"><label>${lang==='es'?'Enlace del Archivo (Google Drive, etc.)':'File Link (Google Drive, etc.)'}</label><input type="text" id="ct-file" placeholder="https://..."/></div>
+    <div id="ct-file-field" style="display:none">
+      <div class="form-field">
+        <label>${lang==='es'?'Subir Archivo (PDF, DOC, etc.)':'Upload File (PDF, DOC, etc.)'}</label>
+        <div id="ct-drop" onclick="document.getElementById('ct-file-input').click()"
+          ondragover="event.preventDefault();this.style.borderColor='var(--primary)'"
+          ondragleave="this.style.borderColor='var(--border)'"
+          ondrop="handleFileDrop(event)"
+          style="border:2px dashed var(--border);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--cream)">
+          <div style="font-size:28px;margin-bottom:8px">📄</div>
+          <div id="ct-drop-text" style="font-size:13px;color:var(--brown-light)">${lang==='es'?'Haz clic o arrastra tu archivo aquí':'Click or drag your file here'}</div>
+          <input type="file" id="ct-file-input" style="display:none" accept=".pdf,.doc,.docx,.xlsx,.pptx,.jpg,.png,.zip" onchange="handleFileSelect(this)"/>
+        </div>
+        <div id="ct-upload-progress" style="display:none;margin-top:8px">
+          <div style="background:var(--border);border-radius:20px;height:8px;overflow:hidden">
+            <div id="ct-progress-bar" style="background:var(--primary);height:100%;width:0%;border-radius:20px;transition:width .3s"></div>
+          </div>
+          <div id="ct-progress-text" style="font-size:12px;color:var(--brown-light);margin-top:4px">0%</div>
+        </div>
+        <div id="ct-upload-success" style="display:none;margin-top:8px;background:#DCFCE7;border-radius:8px;padding:8px 12px;font-size:13px;color:var(--success)"></div>
+      </div>
+      <div class="form-field">
+        <label style="color:var(--brown-light);font-size:11px">${lang==='es'?'O pega un enlace externo (Google Drive, etc.)':'Or paste an external link (Google Drive, etc.)'}</label>
+        <input type="text" id="ct-file" placeholder="https://..."/>
+      </div>
+    </div>
     <div class="form-field"><label>${t('order')}</label><input type="number" id="ct-order" value="0"/></div>
     <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end">
       <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
@@ -1196,6 +1220,43 @@ function toggleCtFields(){
   const v=document.getElementById('ct-vimeo-field'); const f=document.getElementById('ct-file-field');
   if(v) v.style.display=type==='video'?'block':'none';
   if(f) f.style.display=type==='download'?'block':'none';
+}
+
+// ── FILE UPLOAD (for downloadable content) ──────────────────────────────────
+function handleFileDrop(e){
+  e.preventDefault();
+  const dz=document.getElementById('ct-drop'); if(dz) dz.style.borderColor='var(--border)';
+  const file=e.dataTransfer.files[0];
+  if(file) uploadContentFile(file);
+}
+function handleFileSelect(input){
+  const file=input.files[0];
+  if(file) uploadContentFile(file);
+}
+async function uploadContentFile(file){
+  if(file.size>50*1024*1024){ toast(lang==='es'?'Archivo muy grande (máx 50MB)':'File too large (max 50MB)','error'); return; }
+  const fileName=Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  document.getElementById('ct-upload-progress').style.display='block';
+  document.getElementById('ct-drop-text').textContent=lang==='es'?'Subiendo…':'Uploading…';
+  document.getElementById('ct-progress-bar').style.width='40%';
+  document.getElementById('ct-progress-text').textContent=lang==='es'?'Subiendo archivo…':'Uploading file…';
+  const {error}=await _supabase.storage.from('la-academia-files').upload(fileName,file,{cacheControl:'3600',upsert:false});
+  if(error){
+    document.getElementById('ct-upload-progress').style.display='none';
+    document.getElementById('ct-drop-text').textContent=lang==='es'?'Haz clic o arrastra tu archivo aquí':'Click or drag your file here';
+    toast((lang==='es'?'Error al subir: ':'Upload error: ')+error.message,'error');
+    return;
+  }
+  document.getElementById('ct-progress-bar').style.width='100%';
+  document.getElementById('ct-progress-text').textContent='100%';
+  const {data:urlData}=_supabase.storage.from('la-academia-files').getPublicUrl(fileName);
+  document.getElementById('ct-file').value=urlData.publicUrl;
+  document.getElementById('ct-upload-progress').style.display='none';
+  const ok=document.getElementById('ct-upload-success');
+  ok.style.display='block';
+  ok.textContent='✓ '+(lang==='es'?'Archivo subido: ':'File uploaded: ')+file.name;
+  document.getElementById('ct-drop-text').textContent='✓ '+file.name;
+  toast('✓ '+(lang==='es'?'Archivo subido':'File uploaded'),'success');
 }
 
 async function saveContent(){
