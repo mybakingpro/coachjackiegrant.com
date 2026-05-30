@@ -604,10 +604,14 @@ _supabase.auth.onAuthStateChange(async(event,session)=>{
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('app').style.display='flex';
     document.getElementById('user-email-display').textContent=session.user.email;
-    await loadData();
+    appInitialized=true;
+    // Draw the UI IMMEDIATELY with whatever data we have (starts empty).
     renderNav();
     renderPage('home');
-    appInitialized=true;
+    // Load data in the background; re-draw when it arrives. A stuck query can
+    // never freeze the app because the UI is already up and each query times out.
+    loadData().then(()=>{ renderNav(); renderPage(currentPage); })
+              .catch(e=>console.error('loadData failed:',e));
   } else {
     document.getElementById('auth-screen').classList.remove('hidden');
     document.getElementById('app').style.display='none';
@@ -615,19 +619,32 @@ _supabase.auth.onAuthStateChange(async(event,session)=>{
 });
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
+// Race a query against a timer so a hung request can never block startup.
+function withTimeout(promise, ms){
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise((_,reject)=>setTimeout(()=>reject(new Error('query timeout')), ms))
+  ]);
+}
 async function loadData(){
   const uid=currentUser.id;
   const isAdmin=ADMIN_EMAILS.includes(currentUser.email);
+  // Each query is isolated AND time-limited: a failure or hang in one
+  // (e.g. a table not created yet) can never block the others or the app.
+  const safe = async (fn) => {
+    try { const r = await withTimeout(fn(), 8000); return (r&&r.data)||[]; }
+    catch(e){ console.error('query failed:',e); return []; }
+  };
   const [content,progress,subs,orders] = await Promise.all([
-    _supabase.from('la_academia_content').select('*').eq('is_published',true).order('sort_order'),
-    _supabase.from('la_academia_progress').select('*').eq('user_id',uid),
-    isAdmin ? _supabase.from('la_academia_subscribers').select('*').order('created_at',{ascending:false}) : Promise.resolve({data:[]}),
-    _supabase.from('orders').select('*').eq('user_id',uid).order('due_date',{ascending:true}),
+    safe(()=>_supabase.from('la_academia_content').select('*').eq('is_published',true).order('sort_order')),
+    safe(()=>_supabase.from('la_academia_progress').select('*').eq('user_id',uid)),
+    isAdmin ? safe(()=>_supabase.from('la_academia_subscribers').select('*').order('created_at',{ascending:false})) : Promise.resolve([]),
+    safe(()=>_supabase.from('orders').select('*').eq('user_id',uid).order('due_date',{ascending:true})),
   ]);
-  DB.content = content.data||[];
-  DB.progress = progress.data||[];
-  DB.subscribers = subs.data||[];
-  DB.orders = orders.data||[];
+  DB.content = content;
+  DB.progress = progress;
+  DB.subscribers = subs;
+  DB.orders = orders;
 }
 
 async function saveProgress(contentId, completed, testScore=null){
