@@ -29,6 +29,7 @@ button,input,select,textarea{font-family:'Nunito',sans-serif}
 .auth-logo{text-align:center;margin-bottom:8px}
 .auth-logo-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--primary);font-weight:700;line-height:1}
 .auth-logo-sub{font-size:12px;color:var(--brown-light);letter-spacing:.2em;text-transform:uppercase;margin-top:4px}
+.auth-free-badge{display:inline-flex;align-items:center;gap:6px;background:#DCFCE7;color:var(--success);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;margin-top:12px}
 .auth-divider{height:1px;background:var(--border);margin:24px 0}
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--cream);border-radius:12px;padding:4px;margin-bottom:24px}
 .auth-tab{padding:10px;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-weight:700;background:transparent;color:var(--brown-light);transition:all .15s}
@@ -46,25 +47,18 @@ button,input,select,textarea{font-family:'Nunito',sans-serif}
 .auth-error.show{display:block}
 .auth-success{background:#DCFCE7;border:1px solid #86EFAC;border-radius:10px;padding:10px 14px;color:var(--success);font-size:13px;margin-bottom:14px;display:none}
 .auth-success.show{display:block}
-.stripe-btn{display:block;width:100%;padding:13px;border-radius:12px;border:2px solid var(--primary);background:transparent;color:var(--primary);font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;margin-top:12px;transition:all .15s}
-.stripe-btn:hover{background:var(--primary);color:var(--white)}
 
-/* SUBSCRIPTION GATE */
-#sub-screen{position:fixed;inset:0;background:linear-gradient(135deg,#2C1810 0%,#6B3D2E 100%);display:none;align-items:center;justify-content:center;z-index:9998;padding:16px}
-#sub-screen.show{display:flex}
-.sub-card{background:var(--white);border-radius:24px;padding:40px;width:100%;max-width:480px;text-align:center}
-.sub-card h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);margin-bottom:8px}
-.sub-card p{color:var(--brown-light);font-size:14px;line-height:1.6;margin-bottom:24px}
-.sub-price{font-size:48px;font-weight:800;color:var(--primary);margin:16px 0 4px}
-.sub-price span{font-size:16px;color:var(--brown-light);font-weight:400}
-.sub-features{text-align:left;margin:20px 0;display:flex;flex-direction:column;gap:10px}
-.sub-feature{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--brown)}
-.sub-feature::before{content:"✓";color:var(--success);font-weight:800;font-size:16px;flex-shrink:0}
+/* AUTH MYBAKINGPRO AD */
+.auth-mbp{margin-top:20px;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,var(--brown),var(--brown-mid));text-align:center}
+.auth-mbp-title{font-size:13px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.auth-mbp-desc{font-size:11px;color:rgba(255,220,160,.8);line-height:1.5;margin-bottom:10px}
+.auth-mbp-btn{display:inline-block;background:var(--primary);color:var(--white);border-radius:20px;padding:7px 18px;font-size:12px;font-weight:700;text-decoration:none}
+.auth-mbp-btn:hover{opacity:.9}
 
 /* APP */
 #app{display:none;min-height:100vh}
 #app.show{display:flex}
-.sidebar{width:220px;background:var(--brown);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sidebar{width:230px;background:var(--brown);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
 .sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
 .sidebar-logo-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700;line-height:1.2}
 .sidebar-logo-sub{font-size:10px;color:rgba(255,220,160,.4);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
@@ -73,6 +67,15 @@ nav{flex:1;padding:12px 0}
 .nav-btn.active{background:rgba(212,168,83,.12);border-left-color:var(--gold);color:var(--gold)}
 .nav-btn:hover:not(.active){color:rgba(255,220,160,.8);background:rgba(255,255,255,.04)}
 .nav-icon{font-size:18px;flex-shrink:0}
+
+/* SIDEBAR MYBAKINGPRO AD */
+.sidebar-mbp{margin:14px;border-radius:14px;background:linear-gradient(140deg,var(--primary),var(--primary-dark));padding:16px 14px;text-align:center;position:relative;overflow:hidden}
+.sidebar-mbp-star{font-size:20px;margin-bottom:4px}
+.sidebar-mbp-title{font-size:13px;font-weight:800;color:var(--white);margin-bottom:4px}
+.sidebar-mbp-desc{font-size:10px;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:10px}
+.sidebar-mbp-btn{display:block;background:var(--white);color:var(--primary-dark);border-radius:20px;padding:7px 12px;font-size:11px;font-weight:800;text-decoration:none}
+.sidebar-mbp-btn:hover{opacity:.92}
+
 .sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07)}
 .user-info{font-size:11px;color:rgba(255,220,160,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:8px}
 .sidebar-actions{display:flex;flex-direction:column;gap:6px}
@@ -81,6 +84,13 @@ nav{flex:1;padding:12px 0}
 
 /* MAIN */
 .main{flex:1;overflow-y:auto;min-width:0}
+
+/* TOP MYBAKINGPRO STRIP */
+.mbp-strip{background:linear-gradient(90deg,var(--primary-dark),var(--brown));padding:9px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.mbp-strip-text{color:var(--gold-light);font-size:13px;font-weight:600}
+.mbp-strip-btn{background:var(--gold);color:var(--brown);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap}
+.mbp-strip-btn:hover{opacity:.9}
+
 .page{display:none;padding:32px}.page.active{display:block}
 h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-weight:700;margin-bottom:20px}
 .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -91,6 +101,8 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .hero::after{content:'🎂';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.15}
 .hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:8px;color:var(--gold)}
 .hero p{font-size:14px;color:rgba(255,220,160,.75);max-width:500px;line-height:1.6}
+.hero-cta{display:inline-block;margin-top:16px;background:var(--primary);color:var(--white);border-radius:24px;padding:10px 22px;font-size:13px;font-weight:800;text-decoration:none;position:relative}
+.hero-cta:hover{opacity:.9}
 
 /* CATEGORY CARDS */
 .categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
@@ -102,6 +114,15 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .cat-count{font-size:11px;color:var(--primary);font-weight:700;background:var(--cream);border-radius:20px;padding:3px 10px;display:inline-block}
 .cat-progress{height:4px;background:var(--border);border-radius:4px;margin-top:12px;overflow:hidden}
 .cat-progress-fill{height:100%;background:var(--primary);border-radius:4px;transition:width .5s}
+
+/* BIG MYBAKINGPRO BANNER CARD (home) */
+.mbp-banner{grid-column:1/-1;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative;overflow:hidden}
+.mbp-banner::after{content:'⭐';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:70px;opacity:.18}
+.mbp-banner-text{position:relative}
+.mbp-banner-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--white);font-weight:700;margin-bottom:4px}
+.mbp-banner-desc{font-size:13px;color:rgba(255,255,255,.85);max-width:420px;line-height:1.5}
+.mbp-banner-btn{position:relative;background:var(--white);color:var(--primary-dark);border-radius:24px;padding:11px 24px;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
+.mbp-banner-btn:hover{opacity:.92}
 
 /* CONTENT LIST */
 .content-list{display:flex;flex-direction:column;gap:10px}
@@ -122,7 +143,6 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .lesson-back:hover{opacity:.75}
 .video-container{background:var(--brown);border-radius:16px;overflow:hidden;margin-bottom:20px;aspect-ratio:16/9;position:relative}
 .video-container iframe{width:100%;height:100%;border:none}
-.video-placeholder{display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,220,160,.5);font-size:14px;flex-direction:column;gap:12px}
 .lesson-body{background:var(--white);border-radius:16px;border:1px solid var(--border);padding:24px;margin-bottom:20px;line-height:1.8;font-size:14px;color:var(--brown)}
 .lesson-body h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:12px;color:var(--brown)}
 
@@ -153,7 +173,7 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .download-info{flex:1;min-width:0}
 .download-title{font-size:13px;font-weight:700;color:var(--brown);margin-bottom:2px}
 .download-type{font-size:11px;color:var(--brown-light)}
-.download-btn{background:var(--primary);color:var(--white);border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0}
+.download-btn{background:var(--primary);color:var(--white);border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;text-decoration:none}
 .download-btn:hover{opacity:.88}
 
 /* PROGRESS */
@@ -161,6 +181,59 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .stat-card{background:var(--white);border-radius:14px;border:1px solid var(--border);padding:16px;text-align:center}
 .stat-num{font-size:32px;font-weight:800;color:var(--primary)}
 .stat-label{font-size:12px;color:var(--brown-light);margin-top:4px}
+
+/* ===== CALENDAR (Order tracker) ===== */
+.cal-layout{display:flex;gap:20px;flex-wrap:wrap}
+.cal-main{flex:1 1 560px;min-width:0}
+.cal-side{flex:0 0 300px;display:flex;flex-direction:column;gap:14px}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px}
+.cal-nav-btn{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:8px 18px;font-size:16px;cursor:pointer;color:var(--brown)}
+.cal-nav-btn:disabled{opacity:.4;cursor:default}
+.cal-title{text-align:center}
+.cal-title-mo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--brown)}
+.cal-title-yr{font-size:13px;color:var(--brown-light)}
+.cal-today-btn{background:transparent;border:1px solid var(--brown-light);border-radius:20px;padding:4px 16px;font-size:12px;color:var(--brown-mid);cursor:pointer}
+.cal-grid-wrap{background:var(--white);border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(44,24,16,.08);border:1px solid var(--border)}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);background:var(--brown)}
+.cal-dow div{text-align:center;padding:10px 0;font-size:11px;color:var(--gold-light);font-weight:700;letter-spacing:.05em}
+.cal-cells{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border)}
+.cal-cell{background:var(--white);min-height:82px;padding:8px 8px 6px;cursor:pointer;transition:background .15s}
+.cal-cell.empty{background:var(--cream);cursor:default}
+.cal-cell.today{border-top:3px solid var(--primary);background:var(--cream)}
+.cal-cell.sel{background:var(--brown)}
+.cal-cell:hover:not(.empty):not(.sel){background:var(--cream)}
+.cal-cell-num{font-size:13px;color:var(--brown);margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.cal-cell.sel .cal-cell-num{color:var(--gold-light)}
+.cal-cell-today-badge{font-size:8px;background:var(--primary);color:var(--white);border-radius:4px;padding:1px 4px;font-weight:700}
+.cal-dot-row{display:flex;align-items:center;gap:3px;margin-bottom:2px}
+.cal-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;display:inline-block}
+.cal-dot-name{font-size:9px;color:var(--brown-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 10px)}
+.cal-cell.sel .cal-dot-name{color:var(--gold-light)}
+.cal-more{font-size:9px;color:var(--brown-light)}
+.cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding:0 4px}
+.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--brown-light)}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+.day-panel{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 4px 20px rgba(44,24,16,.07)}
+.day-panel-head{background:linear-gradient(135deg,var(--brown),var(--brown-mid));padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.day-panel-date{color:var(--gold-light);font-size:15px;font-weight:700}
+.day-panel-count{color:var(--brown-light);font-size:11px;margin-top:2px}
+.day-add-btn{background:var(--primary);color:var(--white);border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.day-panel-body{padding:14px;max-height:460px;overflow-y:auto}
+.day-empty{text-align:center;padding:28px 12px;color:var(--brown-light)}
+.day-empty-icon{font-size:32px;margin-bottom:8px}
+.order-card{background:var(--cream);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;border-left:4px solid var(--primary);transition:background .15s}
+.order-card:hover{background:var(--cream-dark)}
+.order-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.order-card-name{font-size:13px;font-weight:700;color:var(--brown);line-height:1.2}
+.order-status{border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.order-card-item{font-size:12px;color:var(--brown-mid);margin-top:3px}
+.order-card-meta{font-size:11px;color:var(--brown-light);margin-top:4px;display:flex;gap:10px}
+.order-card-notes{font-size:11px;color:var(--brown-light);margin-top:4px;font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.day-placeholder{background:var(--white);border-radius:16px;border:1px solid var(--border);padding:28px 20px;text-align:center;box-shadow:0 4px 20px rgba(44,24,16,.07)}
+.day-placeholder-icon{font-size:36px;margin-bottom:10px}
+.day-placeholder-title{font-size:14px;font-weight:700;color:var(--brown);margin-bottom:6px}
+.day-placeholder-desc{font-size:12px;color:var(--brown-light);line-height:1.6}
 
 /* ADMIN */
 .admin-section{background:var(--white);border-radius:16px;border:1px solid var(--border);padding:24px;margin-bottom:20px}
@@ -180,7 +253,6 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .admin-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
 .admin-table tr:last-child td{border-bottom:none}
 .badge-active{background:#DCFCE7;color:var(--success);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700}
-.badge-inactive{background:#FEE2E2;color:var(--danger);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700}
 
 /* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--brown);color:var(--white);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s}
@@ -196,14 +268,20 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 .modal-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);font-weight:700}
 .modal-close{background:none;border:none;cursor:pointer;font-size:20px;color:var(--brown-light);padding:0}
 .modal-body{padding:20px 24px 24px}
+.type-toggle{display:flex}
+.type-toggle button{flex:1;padding:9px 4px;font-size:12px;cursor:pointer;border:1.5px solid var(--border);background:var(--cream);color:var(--brown-mid)}
+.type-toggle button:first-child{border-radius:10px 0 0 10px}
+.type-toggle button:last-child{border-radius:0 10px 10px 0}
+.type-toggle button.active{background:var(--primary);color:var(--white);border-color:var(--primary);font-weight:700}
 
 /* RESPONSIVE */
 @media(max-width:768px){
   .sidebar{width:56px}
-  .sidebar-logo-title,.sidebar-logo-sub,.nav-label,.user-info{display:none}
+  .sidebar-logo-title,.sidebar-logo-sub,.nav-label,.user-info,.sidebar-mbp{display:none}
   .main .page{padding:16px}
   .form-grid{grid-template-columns:1fr}
   .hero h1{font-size:24px}
+  .cal-side{flex:1 1 100%}
 }
 </style>
 </head>
@@ -215,6 +293,7 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
     <div class="auth-logo">
       <div class="auth-logo-title">La Academia</div>
       <div class="auth-logo-sub">Coach Jackie Grant</div>
+      <div class="auth-free-badge" id="auth-free-badge">✓ 100% Gratis</div>
     </div>
     <div class="auth-lang">
       <button id="lang-es" class="active" onclick="setLang('es')">Español</button>
@@ -235,33 +314,14 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
       <div class="field"><label id="lbl-name">Nombre Completo</label><input type="text" id="signup-name" placeholder="Tu nombre"/></div>
       <div class="field"><label>Correo Electrónico</label><input type="email" id="signup-email" placeholder="tu@correo.com"/></div>
       <div class="field"><label>Contraseña</label><input type="password" id="signup-password" placeholder="Mínimo 6 caracteres"/></div>
-      <button class="auth-btn" onclick="doSignup()">Crear Cuenta</button>
+      <button class="auth-btn" onclick="doSignup()" id="signup-btn">Crear Cuenta Gratis</button>
     </div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);text-align:center">
-      <p style="font-size:12px;color:var(--brown-light);margin-bottom:10px" id="sub-text">¿Aún no eres miembro?</p>
-      <a href="#" onclick="showSubScreen()" class="stripe-btn" id="join-btn">🎂 Únete por $7.99/mes</a>
-      <p style="font-size:11px;color:var(--brown-light);margin-top:8px" id="access-text">Acceso completo a toda la plataforma</p>
+    <!-- MyBakingPro ad on auth screen -->
+    <div class="auth-mbp">
+      <div class="auth-mbp-title" id="auth-mbp-title">⭐ MyBakingPro</div>
+      <div class="auth-mbp-desc" id="auth-mbp-desc">Lleva tu negocio al siguiente nivel: costos, precios, inventario y más.</div>
+      <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" class="auth-mbp-btn" id="auth-mbp-btn">Descubre MyBakingPro →</a>
     </div>
-  </div>
-</div>
-
-<!-- SUBSCRIPTION SCREEN -->
-<div id="sub-screen">
-  <div class="sub-card">
-    <div style="font-size:48px;margin-bottom:12px">🎂</div>
-    <h2 id="sub-title">Únete a La Academia</h2>
-    <div class="sub-price">$7.99<span>/mes</span></div>
-    <div class="sub-features">
-      <div class="sub-feature" id="sf1">Videos de recetas de bizcochos y comida</div>
-      <div class="sub-feature" id="sf2">Técnicas de decoración paso a paso</div>
-      <div class="sub-feature" id="sf3">Recetas y estrategias para vender</div>
-      <div class="sub-feature" id="sf4">Costos, precios y emprendimiento</div>
-      <div class="sub-feature" id="sf5">Documentos descargables exclusivos</div>
-      <div class="sub-feature" id="sf6">Pruebas de práctica en cada lección</div>
-      <div class="sub-feature" id="sf7">Seguimiento de tu progreso personal</div>
-    </div>
-    <a href="https://buy.stripe.com/dRm14n9UhcBKdQtdISaAw03" id="stripe-checkout-btn" style="display:block;width:100%;padding:14px;border-radius:12px;background:var(--primary);color:var(--white);font-size:15px;font-weight:700;text-align:center;text-decoration:none;margin-bottom:12px">Suscribirse Ahora</a>
-    <button onclick="hideSubScreen()" style="background:none;border:none;color:var(--brown-light);font-size:13px;cursor:pointer;width:100%">← Volver / Back</button>
   </div>
 </div>
 
@@ -273,6 +333,13 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
       <div class="sidebar-logo-sub">Coach Jackie Grant</div>
     </div>
     <nav id="nav-menu"></nav>
+    <!-- MyBakingPro ad in sidebar -->
+    <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" style="text-decoration:none" class="sidebar-mbp" id="sidebar-mbp">
+      <div class="sidebar-mbp-star">⭐</div>
+      <div class="sidebar-mbp-title">MyBakingPro</div>
+      <div class="sidebar-mbp-desc" id="sidebar-mbp-desc">Costos, precios e inventario para tu negocio.</div>
+      <span class="sidebar-mbp-btn" id="sidebar-mbp-btn">Ver más →</span>
+    </a>
     <div class="sidebar-footer">
       <div class="user-info" id="user-email-display"></div>
       <div class="sidebar-actions">
@@ -282,7 +349,13 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
     </div>
   </aside>
   <main class="main">
+    <!-- Persistent MyBakingPro strip -->
+    <div class="mbp-strip">
+      <span class="mbp-strip-text" id="mbp-strip-text">✨ ¿Lista para controlar ingresos, inventario y más?</span>
+      <a href="https://mybakingpro.com" target="_blank" rel="noopener noreferrer" class="mbp-strip-btn" id="mbp-strip-btn">Explora MyBakingPro →</a>
+    </div>
     <div id="page-home" class="page active"></div>
+    <div id="page-calendario" class="page"></div>
     <div id="page-bizcochos" class="page"></div>
     <div id="page-comida" class="page"></div>
     <div id="page-decoracion" class="page"></div>
@@ -312,102 +385,145 @@ h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown);font-w
 // ── CONFIG ───────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://dbipkxclzcfeqpmyagqh.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_MNQj8NjqeH47paFE3hOnnw_i5f8BuvB';
-const STRIPE_PUBLISHABLE_KEY = 'pk_live_51TMyuvEIUzf3gqUn9RasZGVNx5wY8pYeWXaHUk8egDBAB7tt70Oc4cgL5EWOVn8ttBw9B0DkfBMwLFI4xZmrXGHB00Zf6OkkaM';
-const STRIPE_PRICE_ID = 'price_1TX7KxElUzf3gqUnMJ71BIa7';
 const ADMIN_EMAILS = ['coachjackiegrant@gmail.com','pazminonkh@gmail.com'];
+const MBP_URL = 'https://mybakingpro.com';
 
 const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: { autoRefreshToken: true, persistSession: false, detectSessionInUrl: false }
+  auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
 });
 
 // ── STATE ────────────────────────────────────────────────────────────────────
 let currentUser = null;
 let currentPage = 'home';
 let lang = localStorage.getItem('la-lang') || 'es';
-let DB = { content: [], progress: [], subscribers: [] };
+let DB = { content: [], progress: [], subscribers: [], orders: [] };
 let appInitialized = false;
 let viewingLesson = null;
+
+// calendar state
+const _now = new Date();
+let calYear = _now.getFullYear();
+let calMonth = _now.getMonth();
+let selDay = null;
 
 // ── TRANSLATIONS ─────────────────────────────────────────────────────────────
 const T = {
   es: {
-    navHome:'Inicio', navBizcochos:'Recetas de Bizcochos', navComida:'Recetas de Comida',
+    navHome:'Inicio', navCalendario:'Calendario de Pedidos', navBizcochos:'Recetas de Bizcochos', navComida:'Recetas de Comida',
     navDecoracion:'Técnicas de Decoración', navVender:'Recetas para Vender',
     navCostos:'Costos y Emprendimiento', navDescargables:'Descargables',
     navProgreso:'Mi Progreso', navAdmin:'Administración',
     tabLogin:'Iniciar Sesión', tabSignup:'Registrarse',
     lblEmail:'Correo Electrónico', lblPass:'Contraseña', lblName:'Nombre Completo',
-    loginBtn:'Entrar', subText:'¿Aún no eres miembro?', joinBtn:'🎂 Únete por $7.99/mes',
-    accessText:'Acceso completo a toda la plataforma', langToggle:'EN', logout:'Salir',
-    heroTitle:'Bienvenida a La Academia', heroSub:'Tu comunidad de aprendizaje en repostería y cocina con Coach Jackie Grant',
-    sf1:'Videos de recetas de bizcochos y comida', sf2:'Técnicas de decoración paso a paso',
-    sf3:'Recetas y estrategias para vender', sf4:'Costos, precios y emprendimiento',
-    sf5:'Documentos descargables exclusivos', sf6:'Pruebas de práctica en cada lección',
-    sf7:'Seguimiento de tu progreso personal', subTitle:'Únete a La Academia',
+    loginBtn:'Entrar', signupBtn:'Crear Cuenta Gratis', freeBadge:'✓ 100% Gratis',
+    langToggle:'EN', logout:'Salir',
+    heroTitle:'Bienvenida a La Academia', heroSub:'Tu comunidad de aprendizaje en repostería y cocina con Coach Jackie Grant. Aprende, crece y organiza tu negocio — todo gratis.',
+    heroCta:'⭐ Potencia tu negocio con MyBakingPro',
+    mbpStrip:'✨ ¿Lista para controlar ingresos, inventario y más?',
+    mbpStripBtn:'Explora MyBakingPro →',
+    mbpAuthTitle:'⭐ MyBakingPro', mbpAuthDesc:'Lleva tu negocio al siguiente nivel: costos, precios, inventario y más.',
+    mbpAuthBtn:'Descubre MyBakingPro →',
+    mbpSideDesc:'Costos, precios e inventario para tu negocio.', mbpSideBtn:'Ver más →',
+    mbpBannerTitle:'Haz crecer tu negocio con MyBakingPro',
+    mbpBannerDesc:'Calcula costos, fija precios con ganancia, controla inventario y recetas. La herramienta profesional para tu repostería.',
+    mbpBannerBtn:'Probar MyBakingPro →',
     backBtn:'← Volver', markComplete:'✓ Marcar como Completado', completed:'✓ Completado',
     submitTest:'Enviar Respuestas', testPass:'¡Excelente! Pasaste la prueba',
     testFail:'Inténtalo de nuevo. Revisa las respuestas correctas.',
     lessons:'lecciones', noContent:'No hay contenido disponible aún.',
     adminTitle:'Panel de Administración', addContent:'+ Agregar Contenido',
-    addSubscriber:'+ Activar Suscriptor', contentTitle:'Título',
-    contentCategory:'Categoría', contentType:'Tipo', contentVimeo:'ID de Video Vimeo',
-    contentBody:'Contenido / Descripción', contentFile:'URL del Archivo (para descargables)',
-    save:'Guardar', cancel:'Cancelar', subscribers:'Suscriptores',
-    email:'Correo', name:'Nombre', status:'Estado', active:'Activo', inactive:'Inactivo',
-    activate:'Activar', deactivate:'Desactivar', deleteBtn:'Eliminar',
-    contentList:'Contenido', order:'Orden', published:'Publicado', draft:'Borrador',
+    contentTitle:'Título', contentCategory:'Categoría', contentType:'Tipo', contentVimeo:'ID de Video Vimeo',
+    contentBody:'Contenido / Descripción',
+    save:'Guardar', cancel:'Cancelar', members:'Miembros',
+    email:'Correo', name:'Nombre', status:'Estado', active:'Activo',
+    deleteBtn:'Eliminar', contentList:'Contenido', order:'Orden',
     progressTitle:'Mi Progreso', lessonsCompleted:'Lecciones Completadas',
     testsCompleted:'Pruebas Completadas', avgScore:'Promedio de Pruebas',
     errLogin:'Correo o contraseña incorrectos.', errFill:'Por favor completa todos los campos.',
     errPass:'La contraseña debe tener mínimo 6 caracteres.',
     successSignup:'¡Cuenta creada! Revisa tu correo y luego inicia sesión.',
-    errSub:'Debes tener una suscripción activa. Si ya pagaste, espera unos minutos o contacta a Coach Jackie.',
     download:'Descargar',
+    totalLessons:'Lecciones Totales', completedLabel:'Completado', categories:'Categorías',
+    // calendar
+    months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+    daysShort:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],
+    today:'Hoy', addOrder:'+ Agregar Pedido', noOrders:'Sin pedidos este día',
+    clickDay:'Toca cualquier día para ver o agregar pedidos',
+    orderStatuses:["Pendiente","Confirmado","Horneando","Listo","Entregado","Cancelado"],
+    orderCats:["Bizcochos","Galletas","Cupcakes","Cake Pops","Flan","Cheesecake","Dulces en Hojaldre","Tres Leches","Postres","Panes","Otros"],
+    calHelp:'Organiza todos tus pedidos en un solo lugar. Toca un día para empezar.',
+    fCustomer:'Nombre del Cliente *', fPhone:'Teléfono', fItem:'Artículo / Descripción *',
+    fCat:'Categoría', fQty:'Cantidad', fTime:'Hora de Entrega / Recogida',
+    fType:'Tipo', fStatus:'Estado', fNotes:'Notas, diseño, alergias…',
+    fSave:'Guardar Pedido', fDel:'Eliminar Pedido', fNew:'Nuevo Pedido', fEdit:'Editar Pedido',
+    pickup:'🛍 Recoger', delivery:'🚗 Entrega',
+    ordersWord:'pedidos', orderWord:'pedido',
+    confirmDelOrder:'¿Eliminar este pedido?',
   },
   en: {
-    navHome:'Home', navBizcochos:'Bizcocho Recipes', navComida:'Food Recipes',
+    navHome:'Home', navCalendario:'Order Calendar', navBizcochos:'Bizcocho Recipes', navComida:'Food Recipes',
     navDecoracion:'Decorating Techniques', navVender:'Recipes to Sell',
     navCostos:'Costs & Entrepreneurship', navDescargables:'Downloads',
     navProgreso:'My Progress', navAdmin:'Administration',
     tabLogin:'Sign In', tabSignup:'Sign Up',
     lblEmail:'Email Address', lblPass:'Password', lblName:'Full Name',
-    loginBtn:'Sign In', subText:"Not a member yet?", joinBtn:'🎂 Join for $7.99/month',
-    accessText:'Full access to the entire platform', langToggle:'ES', logout:'Sign Out',
-    heroTitle:'Welcome to La Academia', heroSub:'Your learning community for baking and cooking with Coach Jackie Grant',
-    sf1:'Bizcocho and food recipe videos', sf2:'Step-by-step decorating techniques',
-    sf3:'Recipes and strategies for selling', sf4:'Costs, pricing and entrepreneurship',
-    sf5:'Exclusive downloadable documents', sf6:'Practice tests with every lesson',
-    sf7:'Personal progress tracking', subTitle:'Join La Academia',
+    loginBtn:'Sign In', signupBtn:'Create Free Account', freeBadge:'✓ 100% Free',
+    langToggle:'ES', logout:'Sign Out',
+    heroTitle:'Welcome to La Academia', heroSub:'Your learning community for baking and cooking with Coach Jackie Grant. Learn, grow and organize your business — all free.',
+    heroCta:'⭐ Power up your business with MyBakingPro',
+    mbpStrip:'✨ Ready to track revenue, inventory & more?',
+    mbpStripBtn:'Explore MyBakingPro →',
+    mbpAuthTitle:'⭐ MyBakingPro', mbpAuthDesc:'Take your business further: costs, pricing, inventory & more.',
+    mbpAuthBtn:'Discover MyBakingPro →',
+    mbpSideDesc:'Costs, pricing & inventory for your business.', mbpSideBtn:'Learn more →',
+    mbpBannerTitle:'Grow your business with MyBakingPro',
+    mbpBannerDesc:'Calculate costs, price for profit, track inventory and recipes. The professional tool for your bakery.',
+    mbpBannerBtn:'Try MyBakingPro →',
     backBtn:'← Back', markComplete:'✓ Mark as Complete', completed:'✓ Completed',
     submitTest:'Submit Answers', testPass:'Excellent! You passed the test.',
     testFail:'Try again. Review the correct answers.',
     lessons:'lessons', noContent:'No content available yet.',
     adminTitle:'Administration Panel', addContent:'+ Add Content',
-    addSubscriber:'+ Activate Subscriber', contentTitle:'Title',
-    contentCategory:'Category', contentType:'Type', contentVimeo:'Vimeo Video ID',
-    contentBody:'Content / Description', contentFile:'File URL (for downloads)',
-    save:'Save', cancel:'Cancel', subscribers:'Subscribers',
-    email:'Email', name:'Name', status:'Status', active:'Active', inactive:'Inactive',
-    activate:'Activate', deactivate:'Deactivate', deleteBtn:'Delete',
-    contentList:'Content', order:'Order', published:'Published', draft:'Draft',
+    contentTitle:'Title', contentCategory:'Category', contentType:'Type', contentVimeo:'Vimeo Video ID',
+    contentBody:'Content / Description',
+    save:'Save', cancel:'Cancel', members:'Members',
+    email:'Email', name:'Name', status:'Status', active:'Active',
+    deleteBtn:'Delete', contentList:'Content', order:'Order',
     progressTitle:'My Progress', lessonsCompleted:'Lessons Completed',
     testsCompleted:'Tests Completed', avgScore:'Average Test Score',
     errLogin:'Incorrect email or password.', errFill:'Please fill in all fields.',
     errPass:'Password must be at least 6 characters.',
     successSignup:'Account created! Check your email then sign in.',
-    errSub:'You need an active subscription. If you already paid, wait a moment or contact Coach Jackie.',
     download:'Download',
+    totalLessons:'Total Lessons', completedLabel:'Completed', categories:'Categories',
+    months:["January","February","March","April","May","June","July","August","September","October","November","December"],
+    daysShort:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+    today:'Today', addOrder:'+ Add Order', noOrders:'No orders this day',
+    clickDay:'Click any day to view or add orders',
+    orderStatuses:["Pending","Confirmed","Baking","Ready","Delivered","Cancelled"],
+    orderCats:["Cakes","Cookies","Cupcakes","Cake Pops","Flan","Cheesecake","Pastries","Tres Leches","Desserts","Breads","Other"],
+    calHelp:'Organize all your orders in one place. Tap a day to get started.',
+    fCustomer:'Customer Name *', fPhone:'Phone', fItem:'Item / Description *',
+    fCat:'Category', fQty:'Quantity', fTime:'Pickup / Delivery Time',
+    fType:'Type', fStatus:'Status', fNotes:'Notes, design details, allergies…',
+    fSave:'Save Order', fDel:'Delete Order', fNew:'New Order', fEdit:'Edit Order',
+    pickup:'🛍 Pickup', delivery:'🚗 Delivery',
+    ordersWord:'orders', orderWord:'order',
+    confirmDelOrder:'Delete this order?',
   }
 };
 const t = k => T[lang][k] || k;
 
-const CATEGORIES = [
-  { id:'bizcochos', icon:'🎂', page:'page-bizcochos' },
-  { id:'comida',    icon:'🍽️', page:'page-comida' },
-  { id:'decoracion',icon:'🎨', page:'page-decoracion' },
-  { id:'vender',    icon:'💰', page:'page-vender' },
-  { id:'costos',    icon:'📊', page:'page-costos' },
-];
+// status colors (index-aligned to orderStatuses)
+const STATUS_COLORS = ['#C4622D','#2D7A4F','#E8920A','#3AAA3A','#9CA3AF','#B91C1C'];
+function statusIdx(s){
+  const i = T[lang].orderStatuses.indexOf(s);
+  if(i>=0) return i;
+  // try other language
+  const other = lang==='es'?'en':'es';
+  return T[other].orderStatuses.indexOf(s);
+}
+function statusColor(s){ const i=statusIdx(s); return i>=0?STATUS_COLORS[i]:'#C4622D'; }
 
 // ── LANG ─────────────────────────────────────────────────────────────────────
 function setLang(l){ lang=l; localStorage.setItem('la-lang',l); applyLang(); }
@@ -421,15 +537,18 @@ function applyLang(){
   document.getElementById('lbl-pass').textContent = t('lblPass');
   document.getElementById('lbl-name').textContent = t('lblName');
   document.getElementById('login-btn').textContent = t('loginBtn');
-  document.getElementById('sub-text').textContent = t('subText');
-  document.getElementById('join-btn').textContent = t('joinBtn');
-  document.getElementById('access-text').textContent = t('accessText');
-  document.getElementById('sub-title').textContent = t('subTitle');
+  document.getElementById('signup-btn').textContent = t('signupBtn');
+  document.getElementById('auth-free-badge').textContent = t('freeBadge');
   document.getElementById('lang-toggle').textContent = '🌐 '+t('langToggle');
   document.getElementById('logout-label').textContent = t('logout');
-  ['sf1','sf2','sf3','sf4','sf5','sf6','sf7'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.textContent=t(id);
-  });
+  // MyBakingPro ads text
+  document.getElementById('auth-mbp-title').textContent = t('mbpAuthTitle');
+  document.getElementById('auth-mbp-desc').textContent = t('mbpAuthDesc');
+  document.getElementById('auth-mbp-btn').textContent = t('mbpAuthBtn');
+  document.getElementById('sidebar-mbp-desc').textContent = t('mbpSideDesc');
+  document.getElementById('sidebar-mbp-btn').textContent = t('mbpSideBtn');
+  document.getElementById('mbp-strip-text').textContent = t('mbpStrip');
+  document.getElementById('mbp-strip-btn').textContent = t('mbpStripBtn');
   if(appInitialized){ renderNav(); renderPage(currentPage); }
 }
 
@@ -461,8 +580,9 @@ async function doSignup(){
   if(password.length<6){ showAuthError(t('errPass')); return; }
   const {data,error} = await _supabase.auth.signUp({email,password,options:{data:{full_name:name}}});
   if(error){ showAuthError(error.message); return; }
+  // Free app: record member for admin's reference (active by default), no access gate
   if(data.user){
-    await _supabase.from('la_academia_subscribers').insert({id:data.user.id,email,name,is_active:false});
+    try{ await _supabase.from('la_academia_subscribers').insert({id:data.user.id,email,name,is_active:true}); }catch(e){}
   }
   showAuthSuccess(t('successSignup'));
 }
@@ -474,25 +594,13 @@ async function doLogout(){
   document.getElementById('app').style.display='none';
 }
 
-function showSubScreen(){ document.getElementById('sub-screen').classList.add('show'); }
-function hideSubScreen(){ document.getElementById('sub-screen').classList.remove('show'); }
-
 // ── AUTH STATE ────────────────────────────────────────────────────────────────
 _supabase.auth.onAuthStateChange(async(event,session)=>{
   if(event==='TOKEN_REFRESHED'){ if(session?.user) currentUser=session.user; return; }
   if(appInitialized) return;
   if(session?.user){
+    // FREE app — anyone signed in gets full access. No subscription gate.
     currentUser=session.user;
-    const isAdmin=ADMIN_EMAILS.includes(session.user.email);
-    if(!isAdmin){
-      const {data} = await _supabase.from('la_academia_subscribers').select('is_active').eq('id',session.user.id).single();
-      if(!data||!data.is_active){
-        showAuthError(t('errSub'));
-        document.getElementById('auth-screen').classList.remove('hidden');
-        document.getElementById('app').style.display='none';
-        return;
-      }
-    }
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('app').style.display='flex';
     document.getElementById('user-email-display').textContent=session.user.email;
@@ -509,14 +617,17 @@ _supabase.auth.onAuthStateChange(async(event,session)=>{
 // ── DATA ──────────────────────────────────────────────────────────────────────
 async function loadData(){
   const uid=currentUser.id;
-  const [content,progress,subs] = await Promise.all([
+  const isAdmin=ADMIN_EMAILS.includes(currentUser.email);
+  const [content,progress,subs,orders] = await Promise.all([
     _supabase.from('la_academia_content').select('*').eq('is_published',true).order('sort_order'),
     _supabase.from('la_academia_progress').select('*').eq('user_id',uid),
-    ADMIN_EMAILS.includes(currentUser.email) ? _supabase.from('la_academia_subscribers').select('*').order('created_at',{ascending:false}) : {data:[]},
+    isAdmin ? _supabase.from('la_academia_subscribers').select('*').order('created_at',{ascending:false}) : Promise.resolve({data:[]}),
+    _supabase.from('orders').select('*').eq('user_id',uid).order('due_date',{ascending:true}),
   ]);
   DB.content = content.data||[];
   DB.progress = progress.data||[];
   DB.subscribers = subs.data||[];
+  DB.orders = orders.data||[];
 }
 
 async function saveProgress(contentId, completed, testScore=null){
@@ -538,6 +649,7 @@ function getNavItems(){
   const isAdmin=ADMIN_EMAILS.includes(currentUser?.email);
   const items=[
     {id:'home',icon:'🏠',label:t('navHome')},
+    {id:'calendario',icon:'📅',label:t('navCalendario')},
     {id:'bizcochos',icon:'🎂',label:t('navBizcochos')},
     {id:'comida',icon:'🍽️',label:t('navComida')},
     {id:'decoracion',icon:'🎨',label:t('navDecoracion')},
@@ -568,7 +680,8 @@ function goTo(page){
 }
 
 function renderPage(page){
-  const pages={home:renderHome,bizcochos:()=>renderCategory('bizcochos'),comida:()=>renderCategory('comida'),
+  const pages={home:renderHome,calendario:renderCalendario,
+    bizcochos:()=>renderCategory('bizcochos'),comida:()=>renderCategory('comida'),
     decoracion:()=>renderCategory('decoracion'),vender:()=>renderCategory('vender'),
     costos:()=>renderCategory('costos'),descargables:renderDescargables,
     progreso:renderProgreso,admin:renderAdmin};
@@ -584,14 +697,21 @@ function renderHome(){
     <div class="hero">
       <h1>${t('heroTitle')}${name?', '+name.split(' ')[0]:''} 👋</h1>
       <p>${t('heroSub')}</p>
+      <a href="${MBP_URL}" target="_blank" rel="noopener noreferrer" class="hero-cta">${t('heroCta')}</a>
     </div>
     <div class="progress-stats" style="margin-bottom:24px">
       <div class="stat-card"><div class="stat-num">${done}</div><div class="stat-label">${t('lessonsCompleted')}</div></div>
-      <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">${lang==='es'?'Lecciones Totales':'Total Lessons'}</div></div>
-      <div class="stat-card"><div class="stat-num">${total>0?Math.round((done/total)*100):0}%</div><div class="stat-label">${lang==='es'?'Completado':'Completed'}</div></div>
+      <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">${t('totalLessons')}</div></div>
+      <div class="stat-card"><div class="stat-num">${total>0?Math.round((done/total)*100):0}%</div><div class="stat-label">${t('completedLabel')}</div></div>
     </div>
-    <h2 style="margin-bottom:16px">${lang==='es'?'Categorías':'Categories'}</h2>
+    <h2 style="margin-bottom:16px">${t('categories')}</h2>
     <div class="categories-grid">
+      <div class="cat-card" onclick="goTo('calendario')">
+        <div class="cat-icon">📅</div>
+        <div class="cat-title">${t('navCalendario')}</div>
+        <div class="cat-desc">${t('calHelp')}</div>
+        <div class="cat-count">${DB.orders.length} ${t('ordersWord')}</div>
+      </div>
       ${[
         {id:'bizcochos',icon:'🎂',nav:'navBizcochos'},
         {id:'comida',icon:'🍽️',nav:'navComida'},
@@ -610,6 +730,14 @@ function renderHome(){
           <div class="cat-progress"><div class="cat-progress-fill" style="width:${pct}%"></div></div>
         </div>`;
       }).join('')}
+      <!-- Big MyBakingPro banner -->
+      <a href="${MBP_URL}" target="_blank" rel="noopener noreferrer" class="mbp-banner" style="text-decoration:none">
+        <div class="mbp-banner-text">
+          <div class="mbp-banner-title">${t('mbpBannerTitle')}</div>
+          <div class="mbp-banner-desc">${t('mbpBannerDesc')}</div>
+        </div>
+        <span class="mbp-banner-btn">${t('mbpBannerBtn')}</span>
+      </a>
     </div>`;
 }
 
@@ -632,7 +760,7 @@ function renderCategory(cat){
           <div class="content-type-badge ${typeBadge}">${typeIcon}</div>
           <div class="content-item-info">
             <div class="content-item-title">${item.title}</div>
-            <div class="content-item-meta">${item.content_type==='video'?'Video':'Lección'}${prog?.test_score!=null?' · '+lang==='es'?'Prueba':'Test': ''} ${prog?.test_score!=null?prog.test_score+'%':''}</div>
+            <div class="content-item-meta">${item.content_type==='video'?'Video':'Lección'}</div>
           </div>
           ${done?`<div class="content-item-status">${t('completed')}</div>`:''}
         </div>`;
@@ -640,10 +768,7 @@ function renderCategory(cat){
     </div>`;
 }
 
-function openLesson(id, cat){
-  viewingLesson={id,cat};
-  renderLesson({id,cat});
-}
+function openLesson(id, cat){ viewingLesson={id,cat}; renderLesson({id,cat}); }
 
 function renderLesson({id,cat}){
   const item=DB.content.find(c=>c.id===id);
@@ -652,7 +777,6 @@ function renderLesson({id,cat}){
   const done=prog?.completed;
   const pageId='page-'+cat;
   const tests=item.test_questions||[];
-
   document.getElementById(pageId).innerHTML=`
     <button class="lesson-back" onclick="viewingLesson=null;renderCategory('${cat}')">${t('backBtn')}</button>
     <h2 style="margin-bottom:16px">${item.title}</h2>
@@ -699,7 +823,6 @@ async function submitTest(tests,contentId){
   tests.forEach((q,qi)=>{
     const selected=selectedAnswers[qi];
     const correctIdx=q.correct;
-    tests.forEach((_,oi)=>{});
     q.options.forEach((_,oi)=>{
       const el=document.getElementById(`to-${qi}-${oi}`);
       if(!el) return;
@@ -742,7 +865,15 @@ function renderDescargables(){
           </div>
           ${item.file_url?`<a href="${item.file_url}" target="_blank" download class="download-btn">${t('download')}</a>`:''}
         </div>`).join('')}
-    </div>`;
+    </div>
+    <!-- MyBakingPro banner under downloads -->
+    <a href="${MBP_URL}" target="_blank" rel="noopener noreferrer" class="mbp-banner" style="text-decoration:none;margin-top:20px">
+      <div class="mbp-banner-text">
+        <div class="mbp-banner-title">${t('mbpBannerTitle')}</div>
+        <div class="mbp-banner-desc">${t('mbpBannerDesc')}</div>
+      </div>
+      <span class="mbp-banner-btn">${t('mbpBannerBtn')}</span>
+    </a>`;
 }
 
 // ── PROGRESS ──────────────────────────────────────────────────────────────────
@@ -772,6 +903,220 @@ function renderProgreso(){
     </div>`;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+//  ORDER CALENDAR
+// ════════════════════════════════════════════════════════════════════════════
+function pad2(n){ return String(n).padStart(2,'0'); }
+function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; }
+function dateStr(y,m,d){ return `${y}-${pad2(m+1)}-${pad2(d)}`; }
+function getDaysInMonth(y,m){ return new Date(y,m+1,0).getDate(); }
+function getFirstDow(y,m){ return new Date(y,m,1).getDay(); }
+function fmt12h(tm){ if(!tm) return ''; const parts=tm.split(':'); if(parts.length<2) return tm; const h=parseInt(parts[0]); const m=parts[1].slice(0,2); return `${h%12||12}:${m} ${h>=12?'PM':'AM'}`; }
+
+function ordersOnDay(d){ const ds=dateStr(calYear,calMonth,d); return DB.orders.filter(o=>o.due_date===ds); }
+
+function renderCalendario(){
+  const today=todayStr();
+  const minY=_now.getFullYear(), minM=_now.getMonth();
+  const maxY=_now.getFullYear()+2, maxM=_now.getMonth();
+  const canPrev=!(calYear===minY&&calMonth===minM);
+  const canNext=!(calYear===maxY&&calMonth===maxM);
+
+  const daysCount=getDaysInMonth(calYear,calMonth);
+  const first=getFirstDow(calYear,calMonth);
+  const cells=[...Array(first).fill(null),...Array.from({length:daysCount},(_,i)=>i+1)];
+  while(cells.length%7!==0) cells.push(null);
+
+  const cellsHtml=cells.map(day=>{
+    if(!day) return `<div class="cal-cell empty"></div>`;
+    const ds=dateStr(calYear,calMonth,day);
+    const isToday=ds===today, isSel=selDay===day;
+    const dos=ordersOnDay(day);
+    const dotsHtml=dos.slice(0,3).map(o=>`
+      <div class="cal-dot-row">
+        <span class="cal-dot" style="background:${statusColor(o.status)}"></span>
+        <span class="cal-dot-name">${(o.customer||'').split(' ')[0]}</span>
+      </div>`).join('')+(dos.length>3?`<div class="cal-more">+${dos.length-3}</div>`:'');
+    return `<div class="cal-cell${isToday?' today':''}${isSel?' sel':''}" onclick="selectCalDay(${isSel?'null':day})">
+      <div class="cal-cell-num">${day}${isToday?`<span class="cal-cell-today-badge">${lang==='es'?'HOY':'TODAY'}</span>`:''}</div>
+      ${dotsHtml}
+    </div>`;
+  }).join('');
+
+  const dowHtml=t('daysShort').map(d=>`<div>${d}</div>`).join('');
+  const legendHtml=t('orderStatuses').map((s,i)=>`
+    <div class="cal-legend-item"><span class="cal-legend-dot" style="background:${STATUS_COLORS[i]}"></span>${s}</div>`).join('');
+
+  let sideHtml;
+  if(selDay){
+    const dos=ordersOnDay(selDay);
+    const list = dos.length===0
+      ? `<div class="day-empty"><div class="day-empty-icon">🧁</div><div>${t('noOrders')}</div>
+           <button class="day-add-btn" style="margin-top:14px" onclick="openOrderModal(null)">${t('addOrder')}</button></div>`
+      : dos.map(o=>`
+          <div class="order-card" style="border-left-color:${statusColor(o.status)}" onclick="openOrderModal('${o.id}')">
+            <div class="order-card-top">
+              <div class="order-card-name">${o.customer||''}</div>
+              <span class="order-status" style="background:${statusColor(o.status)}22;color:${statusColor(o.status)}">${o.status||''}</span>
+            </div>
+            <div class="order-card-item">${o.item||''}${o.quantity>1?' × '+o.quantity:''}</div>
+            <div class="order-card-meta">
+              ${o.time?`<span>🕐 ${fmt12h(o.time)}</span>`:''}
+              <span>${o.type==='Delivery'?'🚗':'🛍'} ${o.type||''}</span>
+            </div>
+            ${o.notes?`<div class="order-card-notes">${o.notes}</div>`:''}
+          </div>`).join('');
+    sideHtml=`
+      <div class="day-panel">
+        <div class="day-panel-head">
+          <div>
+            <div class="day-panel-date">${t('months')[calMonth]} ${selDay}</div>
+            <div class="day-panel-count">${dos.length} ${dos.length===1?t('orderWord'):t('ordersWord')}</div>
+          </div>
+          <button class="day-add-btn" onclick="openOrderModal(null)">${t('addOrder')}</button>
+        </div>
+        <div class="day-panel-body">${list}</div>
+      </div>`;
+  } else {
+    sideHtml=`
+      <div class="day-placeholder">
+        <div class="day-placeholder-icon">📅</div>
+        <div class="day-placeholder-title">${t('months')[calMonth]} ${calYear}</div>
+        <div class="day-placeholder-desc">${t('clickDay')}</div>
+      </div>`;
+  }
+  // MyBakingPro card in calendar sidebar
+  sideHtml+=`
+    <a href="${MBP_URL}" target="_blank" rel="noopener noreferrer" class="sidebar-mbp" style="margin:0;text-decoration:none;display:block">
+      <div class="sidebar-mbp-star">⭐</div>
+      <div class="sidebar-mbp-title">MyBakingPro</div>
+      <div class="sidebar-mbp-desc">${t('mbpSideDesc')}</div>
+      <span class="sidebar-mbp-btn">${t('mbpSideBtn')}</span>
+    </a>`;
+
+  document.getElementById('page-calendario').innerHTML=`
+    <div class="page-header"><h2>${t('navCalendario')}</h2></div>
+    <div class="cal-layout">
+      <div class="cal-main">
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="calPrev()" ${canPrev?'':'disabled'}>‹</button>
+          <div class="cal-title">
+            <div class="cal-title-mo">${t('months')[calMonth]}</div>
+            <div class="cal-title-yr">${calYear}</div>
+          </div>
+          <button class="cal-nav-btn" onclick="calNext()" ${canNext?'':'disabled'}>›</button>
+        </div>
+        <div style="text-align:center;margin-bottom:12px">
+          <button class="cal-today-btn" onclick="calGoToday()">◉ ${t('today')}</button>
+        </div>
+        <div class="cal-grid-wrap">
+          <div class="cal-dow">${dowHtml}</div>
+          <div class="cal-cells">${cellsHtml}</div>
+        </div>
+        <div class="cal-legend">${legendHtml}</div>
+      </div>
+      <div class="cal-side">${sideHtml}</div>
+    </div>`;
+}
+
+function selectCalDay(d){ selDay=d; renderCalendario(); }
+function calPrev(){ if(calMonth===0){calMonth=11;calYear--;}else calMonth--; selDay=null; renderCalendario(); }
+function calNext(){ if(calMonth===11){calMonth=0;calYear++;}else calMonth++; selDay=null; renderCalendario(); }
+function calGoToday(){ calYear=_now.getFullYear(); calMonth=_now.getMonth(); selDay=_now.getDate(); renderCalendario(); }
+
+let editingOrderId=null;
+function openOrderModal(orderId){
+  editingOrderId=orderId;
+  const o = orderId ? DB.orders.find(x=>x.id===orderId) : null;
+  const cats=t('orderCats');
+  const statuses=t('orderStatuses');
+  const cur = o || {customer:'',phone:'',item:'',category:cats[0],quantity:1,time:'',type:'Pickup',status:statuses[0],notes:''};
+  // parse time into hour/min/ampm
+  let th='12',tm='00',tap='AM';
+  if(cur.time){ const mt=cur.time.match(/(\d+):(\d+)\s*(AM|PM)/i); if(mt){th=mt[1];tm=mt[2];tap=mt[3].toUpperCase();} }
+  const hourOpts='1,2,3,4,5,6,7,8,9,10,11,12'.split(',').map(h=>`<option ${h===th?'selected':''}>${h}</option>`).join('');
+  const minOpts='00,15,30,45'.split(',').map(m=>`<option ${m===tm?'selected':''}>${m}</option>`).join('');
+  const apOpts=['AM','PM'].map(a=>`<option ${a===tap?'selected':''}>${a}</option>`).join('');
+  const catOpts=cats.map(c=>`<option ${c===cur.category?'selected':''}>${c}</option>`).join('');
+  const statusOpts=statuses.map(s=>`<option ${s===cur.status?'selected':''}>${s}</option>`).join('');
+
+  openModal(orderId?t('fEdit'):t('fNew'),`
+    <div class="form-grid">
+      <div class="form-field" style="grid-column:1/-1"><label>${t('fCustomer')}</label><input id="o-customer" value="${(cur.customer||'').replace(/"/g,'&quot;')}" placeholder="María González"/></div>
+      <div class="form-field"><label>${t('fPhone')}</label><input id="o-phone" value="${(cur.phone||'').replace(/"/g,'&quot;')}" placeholder="787-000-0000"/></div>
+      <div class="form-field"><label>${t('fQty')}</label><input id="o-qty" type="number" min="1" value="${cur.quantity||1}"/></div>
+      <div class="form-field" style="grid-column:1/-1"><label>${t('fItem')}</label><input id="o-item" value="${(cur.item||'').replace(/"/g,'&quot;')}" placeholder="Torta de cumpleaños 2 pisos"/></div>
+      <div class="form-field"><label>${t('fCat')}</label><select id="o-cat">${catOpts}</select></div>
+      <div class="form-field"><label>${t('fTime')}</label>
+        <div style="display:flex;gap:6px">
+          <select id="o-th" style="flex:1">${hourOpts}</select>
+          <select id="o-tm" style="flex:1">${minOpts}</select>
+          <select id="o-tap" style="flex:1">${apOpts}</select>
+        </div>
+      </div>
+      <div class="form-field"><label>${t('fType')}</label>
+        <div class="type-toggle">
+          <button type="button" id="o-type-pickup" class="${cur.type!=='Delivery'?'active':''}" onclick="setOrderType('Pickup')">${t('pickup')}</button>
+          <button type="button" id="o-type-delivery" class="${cur.type==='Delivery'?'active':''}" onclick="setOrderType('Delivery')">${t('delivery')}</button>
+        </div>
+        <input type="hidden" id="o-type" value="${cur.type||'Pickup'}"/>
+      </div>
+      <div class="form-field"><label>${t('fStatus')}</label><select id="o-status">${statusOpts}</select></div>
+      <div class="form-field" style="grid-column:1/-1"><label>${t('fNotes')}</label><textarea id="o-notes" placeholder="${t('fNotes')}">${cur.notes||''}</textarea></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;align-items:center;justify-content:flex-end">
+      ${orderId?`<button class="btn-danger" style="margin-right:auto" onclick="deleteOrder('${orderId}')">${t('fDel')}</button>`:''}
+      <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn-primary" onclick="saveOrder()">${t('fSave')}</button>
+    </div>`);
+}
+
+function setOrderType(type){
+  document.getElementById('o-type').value=type;
+  document.getElementById('o-type-pickup').classList.toggle('active',type==='Pickup');
+  document.getElementById('o-type-delivery').classList.toggle('active',type==='Delivery');
+}
+
+async function saveOrder(){
+  const customer=document.getElementById('o-customer').value.trim();
+  const item=document.getElementById('o-item').value.trim();
+  if(!customer||!item){ toast(t('errFill'),'error'); return; }
+  const th=document.getElementById('o-th').value;
+  const tm=document.getElementById('o-tm').value;
+  const tap=document.getElementById('o-tap').value;
+  const ds = selDay ? dateStr(calYear,calMonth,selDay) : todayStr();
+  const record={
+    user_id:currentUser.id, customer, phone:document.getElementById('o-phone').value.trim(),
+    item, category:document.getElementById('o-cat').value,
+    quantity:parseInt(document.getElementById('o-qty').value)||1,
+    due_date:ds, time:`${th}:${tm} ${tap}`,
+    type:document.getElementById('o-type').value,
+    status:document.getElementById('o-status').value,
+    notes:document.getElementById('o-notes').value.trim()
+  };
+  let err;
+  if(editingOrderId){
+    ({error:err}=await _supabase.from('orders').update(record).eq('id',editingOrderId));
+  } else {
+    ({error:err}=await _supabase.from('orders').insert(record));
+  }
+  if(err){ toast(t('errFill'),'error'); console.error(err); return; }
+  const {data}=await _supabase.from('orders').select('*').eq('user_id',currentUser.id).order('due_date',{ascending:true});
+  DB.orders=data||[];
+  closeModal();
+  toast(lang==='es'?'Pedido guardado':'Order saved','success');
+  renderCalendario();
+}
+
+async function deleteOrder(id){
+  if(!confirm(t('confirmDelOrder'))) return;
+  await _supabase.from('orders').delete().eq('id',id);
+  DB.orders=DB.orders.filter(o=>o.id!==id);
+  closeModal();
+  toast(lang==='es'?'Eliminado':'Deleted');
+  renderCalendario();
+}
+
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
 function renderAdmin(){
   if(!ADMIN_EMAILS.includes(currentUser?.email)){ goTo('home'); return; }
@@ -779,19 +1124,17 @@ function renderAdmin(){
     <h2>${t('adminTitle')}</h2>
 
     <div class="admin-section">
-      <h3>${t('subscribers')}</h3>
-      <button class="btn-primary" style="margin-bottom:16px" onclick="openAddSubscriber()">${t('addSubscriber')}</button>
+      <h3>${t('members')}</h3>
       <div style="overflow-x:auto">
       <table class="admin-table">
-        <thead><tr><th>${t('name')}</th><th>${t('email')}</th><th>${t('status')}</th><th></th></tr></thead>
+        <thead><tr><th>${t('name')}</th><th>${t('email')}</th><th>${t('status')}</th></tr></thead>
         <tbody>
           ${DB.subscribers.map(s=>`<tr>
             <td>${s.name||'—'}</td>
             <td>${s.email}</td>
-            <td><span class="${s.is_active?'badge-active':'badge-inactive'}">${s.is_active?t('active'):t('inactive')}</span></td>
-            <td><button class="btn-danger" onclick="toggleSub('${s.id}',${s.is_active})">${s.is_active?t('deactivate'):t('activate')}</button></td>
+            <td><span class="badge-active">${t('active')}</span></td>
           </tr>`).join('')}
-          ${DB.subscribers.length===0?`<tr><td colspan="4" style="text-align:center;color:var(--brown-light);padding:20px">${lang==='es'?'Sin suscriptores aún':'No subscribers yet'}</td></tr>`:''}
+          ${DB.subscribers.length===0?`<tr><td colspan="3" style="text-align:center;color:var(--brown-light);padding:20px">${lang==='es'?'Sin miembros aún':'No members yet'}</td></tr>`:''}
         </tbody>
       </table>
       </div>
@@ -803,9 +1146,7 @@ function renderAdmin(){
       <div style="overflow-x:auto">
       <table class="admin-table">
         <thead><tr><th>${t('contentTitle')}</th><th>${t('contentCategory')}</th><th>${t('contentType')}</th><th></th></tr></thead>
-        <tbody id="content-table-body">
-          ${renderContentRows()}
-        </tbody>
+        <tbody>${renderContentRows()}</tbody>
       </table>
       </div>
     </div>`;
@@ -822,13 +1163,6 @@ function renderContentRows(){
   </tr>`).join('');
 }
 
-async function toggleSub(id,current){
-  await _supabase.from('la_academia_subscribers').update({is_active:!current}).eq('id',id);
-  DB.subscribers=DB.subscribers.map(s=>s.id===id?{...s,is_active:!current}:s);
-  toast((!current?t('active'):t('inactive')),'success');
-  renderAdmin();
-}
-
 async function deleteContent(id){
   if(!confirm(lang==='es'?'¿Eliminar este contenido?':'Delete this content?')) return;
   await _supabase.from('la_academia_content').delete().eq('id',id);
@@ -837,112 +1171,31 @@ async function deleteContent(id){
   renderAdmin();
 }
 
-function openAddSubscriber(){
-  openModal(t('addSubscriber'),`
-    <div class="form-field"><label>${t('name')}</label><input type="text" id="sub-name"/></div>
-    <div class="form-field"><label>${t('email')}</label><input type="email" id="sub-email"/></div>
-    <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end">
-      <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
-      <button class="btn-primary" onclick="addSubscriber()">${t('save')}</button>
-    </div>`);
-}
-
-async function addSubscriber(){
-  const name=document.getElementById('sub-name').value.trim();
-  const email=document.getElementById('sub-email').value.trim();
-  if(!email){ toast(t('errFill'),'error'); return; }
-  const {data} = await _supabase.from('la_academia_subscribers').insert({email,name,is_active:true}).select().single();
-  if(data){ DB.subscribers.unshift(data); toast(lang==='es'?'Suscriptor activado':'Subscriber activated','success'); }
-  closeModal(); renderAdmin();
-}
-
 function openAddContent(){
   const catOpts=['bizcochos','comida','decoracion','vender','costos','descargables'].map(c=>`<option value="${c}">${c}</option>`).join('');
   openModal(t('addContent'),`
     <div class="form-field"><label>${t('contentTitle')}</label><input type="text" id="ct-title"/></div>
     <div class="form-grid">
-      <div class="form-field"><label>${t('contentCategory')}</label>
-        <select id="ct-cat" onchange="toggleFileFields()">${catOpts}</select></div>
+      <div class="form-field"><label>${t('contentCategory')}</label><select id="ct-cat">${catOpts}</select></div>
       <div class="form-field"><label>${t('contentType')}</label>
-        <select id="ct-type" onchange="toggleFileFields()"><option value="video">Video</option><option value="lesson">Lección</option><option value="download">Descargable</option></select></div>
+        <select id="ct-type" onchange="toggleCtFields()"><option value="video">Video</option><option value="lesson">Lección</option><option value="download">Descargable</option></select></div>
     </div>
-    <div id="vimeo-field" class="form-field"><label>${t('contentVimeo')} (${lang==='es'?'solo el número':'numbers only'})</label><input type="text" id="ct-vimeo" placeholder="ej: 123456789"/></div>
+    <div id="ct-vimeo-field" class="form-field"><label>${t('contentVimeo')} (${lang==='es'?'solo el número':'numbers only'})</label><input type="text" id="ct-vimeo" placeholder="ej: 123456789"/></div>
     <div class="form-field"><label>${t('contentBody')}</label><textarea id="ct-body"></textarea></div>
-    <div id="file-upload-section">
-      <div class="form-field" id="file-upload-field">
-        <label>${lang==='es'?'Subir Archivo (PDF, DOC, etc.)':'Upload File (PDF, DOC, etc.)'}</label>
-        <div style="border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s" id="drop-zone" onclick="document.getElementById('ct-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--primary)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleFileDrop(event)">
-          <div style="font-size:28px;margin-bottom:8px">📄</div>
-          <div style="font-size:13px;color:var(--brown-light)" id="drop-zone-text">${lang==='es'?'Haz clic o arrastra tu archivo aquí':'Click or drag your file here'}</div>
-          <input type="file" id="ct-file-input" style="display:none" accept=".pdf,.doc,.docx,.xlsx,.pptx,.jpg,.png,.zip" onchange="handleFileSelect(this)"/>
-        </div>
-        <div id="upload-progress" style="display:none;margin-top:8px">
-          <div style="background:var(--border);border-radius:20px;height:8px;overflow:hidden">
-            <div id="progress-bar" style="background:var(--primary);height:100%;width:0%;border-radius:20px;transition:width .3s"></div>
-          </div>
-          <div style="font-size:12px;color:var(--brown-light);margin-top:4px" id="progress-text">0%</div>
-        </div>
-        <div id="upload-success" style="display:none;margin-top:8px;background:#DCFCE7;border-radius:8px;padding:8px 12px;font-size:13px;color:var(--success)"></div>
-      </div>
-      <div class="form-field">
-        <label style="color:var(--brown-light);font-size:11px">${lang==='es'?'O pega un enlace externo (Google Drive, etc.)':'Or paste an external link (Google Drive, etc.)'}</label>
-        <input type="text" id="ct-file" placeholder="https://..."/>
-      </div>
-    </div>
+    <div id="ct-file-field" class="form-field" style="display:none"><label>${lang==='es'?'Enlace del Archivo (Google Drive, etc.)':'File Link (Google Drive, etc.)'}</label><input type="text" id="ct-file" placeholder="https://..."/></div>
     <div class="form-field"><label>${t('order')}</label><input type="number" id="ct-order" value="0"/></div>
     <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end">
       <button class="btn-secondary" onclick="closeModal()">${t('cancel')}</button>
       <button class="btn-primary" onclick="saveContent()">${t('save')}</button>
     </div>`);
-  toggleFileFields();
+  toggleCtFields();
 }
 
-function toggleFileFields(){
+function toggleCtFields(){
   const type=document.getElementById('ct-type')?.value;
-  const vimeoField=document.getElementById('vimeo-field');
-  const fileSection=document.getElementById('file-upload-section');
-  if(vimeoField) vimeoField.style.display=type==='video'?'block':'none';
-  if(fileSection) fileSection.style.display=type==='download'?'block':'none';
-}
-
-let uploadedFileUrl=null;
-
-function handleFileDrop(e){
-  e.preventDefault();
-  document.getElementById('drop-zone').style.borderColor='var(--border)';
-  const file=e.dataTransfer.files[0];
-  if(file) uploadFile(file);
-}
-
-function handleFileSelect(input){
-  const file=input.files[0];
-  if(file) uploadFile(file);
-}
-
-async function uploadFile(file){
-  if(file.size>50*1024*1024){ toast(lang==='es'?'Archivo muy grande (máx 50MB)':'File too large (max 50MB)','error'); return; }
-  const ext=file.name.split('.').pop();
-  const fileName=Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-  document.getElementById('upload-progress').style.display='block';
-  document.getElementById('drop-zone-text').textContent=lang==='es'?'Subiendo...':'Uploading...';
-  document.getElementById('progress-bar').style.width='30%';
-  document.getElementById('progress-text').textContent=lang==='es'?'Subiendo archivo...':'Uploading file...';
-  const {data,error}=await _supabase.storage.from('la-academia-files').upload(fileName,file,{cacheControl:'3600',upsert:false});
-  if(error){
-    document.getElementById('upload-progress').style.display='none';
-    toast((lang==='es'?'Error al subir: ':'Upload error: ')+error.message,'error');
-    return;
-  }
-  document.getElementById('progress-bar').style.width='100%';
-  document.getElementById('progress-text').textContent='100%';
-  const {data:urlData}=_supabase.storage.from('la-academia-files').getPublicUrl(fileName);
-  uploadedFileUrl=urlData.publicUrl;
-  document.getElementById('ct-file').value=uploadedFileUrl;
-  document.getElementById('upload-progress').style.display='none';
-  document.getElementById('upload-success').style.display='block';
-  document.getElementById('upload-success').textContent='✓ '+(lang==='es'?'Archivo subido correctamente: ':'File uploaded: ')+file.name;
-  document.getElementById('drop-zone-text').textContent='✓ '+file.name;
-  toast('✓ '+(lang==='es'?'Archivo subido':'File uploaded'),'success');
+  const v=document.getElementById('ct-vimeo-field'); const f=document.getElementById('ct-file-field');
+  if(v) v.style.display=type==='video'?'block':'none';
+  if(f) f.style.display=type==='download'?'block':'none';
 }
 
 async function saveContent(){
@@ -953,7 +1206,7 @@ async function saveContent(){
     content_type:document.getElementById('ct-type').value,
     vimeo_id:document.getElementById('ct-vimeo').value.trim()||null,
     body:document.getElementById('ct-body').value.trim()||null,
-    file_url:document.getElementById('ct-file').value.trim()||null,
+    file_url:document.getElementById('ct-file')?.value.trim()||null,
     sort_order:+document.getElementById('ct-order').value||0,
     is_published:true, test_questions:[]
   };
